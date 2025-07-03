@@ -1,0 +1,534 @@
+# Copyright (C) 2023 Too Much Niche
+# This file is distributed under the same license as the Too Much Niche package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Too Much Niche 1.0.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/too-much-niche\n"
+"POT-Creation-Date: 2023-07-18 06:52:50+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2023-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: application/TaskScheduler.php:47
+msgid "Every 5 minutes"
+msgstr ""
+
+#: application/admin/AiConfig.php:23
+msgid "AI settings"
+msgstr ""
+
+#: application/admin/AiConfig.php:38
+msgid "AI"
+msgstr ""
+
+#: application/admin/AiConfig.php:45
+msgid "Creativity level"
+msgstr ""
+
+#: application/admin/AiConfig.php:51
+msgid "Tone of voice (optional)"
+msgstr ""
+
+#: application/admin/AiConfig.php:53
+msgid "- none -"
+msgstr ""
+
+#: application/admin/AiConfig.php:57
+msgid ""
+"I have read and accept the OpenAI's <a target=\"_blank\" href=\"%s\">Usage "
+"policy</a> and <a target=\"_blank\" href=\"%s\">Sharing & Publication "
+"policy</a>"
+msgstr ""
+
+#: application/admin/AiConfig.php:119
+msgid "Accept Open AI policies."
+msgstr ""
+
+#: application/admin/CeConfig.php:70 application/admin/CeConfig.php:85
+msgid "%s integration"
+msgstr ""
+
+#: application/admin/CeConfig.php:92
+msgid "Main affiliate module"
+msgstr ""
+
+#: application/admin/CeConfig.php:92
+msgid "(required)"
+msgstr ""
+
+#: application/admin/CeConfig.php:94
+msgid "Please select a module"
+msgstr ""
+
+#: application/admin/CeConfig.php:100 application/admin/LicConfig.php:56
+#: application/admin/NicheConfig.php:55
+msgid "The field \"%s\" can not be empty."
+msgstr ""
+
+#: application/admin/CeConfig.php:104
+msgid ""
+"Make sure the module is configured correctly and returns search results."
+msgstr ""
+
+#: application/admin/CeConfig.php:112
+msgid "Secondary affiliate module"
+msgstr ""
+
+#: application/admin/CeConfig.php:112
+msgid "(optional)"
+msgstr ""
+
+#: application/admin/CeConfig.php:113
+msgid "Usually blocks of this module will be used at the bottom of pages."
+msgstr ""
+
+#: application/admin/CeConfig.php:115
+msgid "None"
+msgstr ""
+
+#: application/admin/CeConfig.php:120
+msgid "YouTube videos"
+msgstr ""
+
+#: application/admin/CeConfig.php:123
+msgid "Enabled"
+msgstr ""
+
+#: application/admin/CeConfig.php:124
+msgid "Disabled"
+msgstr ""
+
+#: application/admin/CeConfig.php:130
+msgid ""
+"Make sure the <a target=\"_blank\" href=\"%s\">Youtube module</a> is "
+"activated and configured correctly."
+msgstr ""
+
+#: application/admin/CeConfig.php:135
+msgid "Allow passing module settings"
+msgstr ""
+
+#: application/admin/CeConfig.php:136
+msgid ""
+"Your module settings will be used by our automation system to search for "
+"affiliate products. All settings will be deleted when the task is completed."
+msgstr ""
+
+#: application/admin/CeConfig.php:163
+msgid ""
+"To add affiliate products to your site, <em>%s</em> requires <strong>%s %s+</"
+"strong> to be installed and active."
+msgstr ""
+
+#: application/admin/CeConfig.php:164 application/admin/LicConfig.php:46
+msgid ""
+"If you don't have one yet, you can purchase it from our <a target='_blank' "
+"href='%s'>official website</a>."
+msgstr ""
+
+#: application/admin/CeConfig.php:182
+msgid ""
+"To add affiliate products to your site, <em>%s</em> requires one of the "
+"following modules to be active:"
+msgstr ""
+
+#: application/admin/CeConfig.php:190
+msgid "activate now"
+msgstr ""
+
+#: application/admin/CeConfig.php:222
+msgid "Activate the %s module."
+msgstr ""
+
+#: application/admin/CeConfig.php:224
+msgid "Activate the <a target=\"_blank\" href=\"%s\">%s module</a>."
+msgstr ""
+
+#: application/admin/CeConfig.php:245
+msgid "The %s module did not return products for test request."
+msgstr ""
+
+#: application/admin/CeConfig.php:248
+msgid "API response: \"%s\""
+msgstr ""
+
+#: application/admin/CeConfig.php:263
+msgid "Module settings must be passed."
+msgstr ""
+
+#: application/admin/LicConfig.php:22
+msgid "License settings"
+msgstr ""
+
+#: application/admin/LicConfig.php:37
+msgid "License"
+msgstr ""
+
+#: application/admin/LicConfig.php:44
+msgid "License key"
+msgstr ""
+
+#: application/admin/LicConfig.php:45
+msgid "Please enter a valid license key."
+msgstr ""
+
+#: application/admin/LicConfig.php:45
+msgid "You can find your key on the %s page."
+msgstr ""
+
+#: application/admin/LicConfig.php:60
+msgid "Invalid License key."
+msgstr ""
+
+#: application/admin/LicConfig.php:64
+msgid "License key is not accepted."
+msgstr ""
+
+#: application/admin/LicConfig.php:64
+msgid "Please try again."
+msgstr ""
+
+#: application/admin/LicConfig.php:64
+msgid ""
+"If you are still having trouble with your License key please <a href=\"%s\" "
+"target=\"_blank\">contact</a> our support team."
+msgstr ""
+
+#: application/admin/MyListTable.php:112
+msgid "ago"
+msgstr ""
+
+#: application/admin/MyListTable.php:140
+msgid "Delete"
+msgstr ""
+
+#: application/admin/NicheConfig.php:21
+msgid "Niche settings"
+msgstr ""
+
+#: application/admin/NicheConfig.php:36 application/admin/NicheConfig.php:43
+#: application/admin/NicheConfig.php:55 application/admin/NicheConfig.php:60
+#: application/admin/NicheConfig.php:65 application/admin/NicheConfig.php:70
+#: application/admin/NicheConfig.php:75
+msgid "Niche"
+msgstr ""
+
+#: application/admin/NicheConfig.php:44
+msgid "Enter your desired niche and keywords (up to 350 characters)."
+msgstr ""
+
+#: application/admin/NicheConfig.php:60
+msgid "The field \"%s\" should contain at least %d characters."
+msgstr ""
+
+#: application/admin/NicheConfig.php:65
+msgid "The field \"%s\" should contain at most %d characters."
+msgstr ""
+
+#: application/admin/NicheConfig.php:70
+msgid ""
+"The field \"%s\" can only contain alphanumeric characters, commas, colons "
+"and spaces."
+msgstr ""
+
+#: application/admin/NicheConfig.php:75
+msgid "The field \"%s\" must begin with a letter."
+msgstr ""
+
+#: application/admin/NicheConfig.php:81
+msgid "Language"
+msgstr ""
+
+#: application/admin/NicheConfig.php:145
+msgid "Show niche examples"
+msgstr ""
+
+#: application/admin/RebuildMetabox.php:72
+msgid "Restore products"
+msgstr ""
+
+#: application/admin/RebuildMetabox.php:85
+msgid "Rebuild"
+msgstr ""
+
+#: application/admin/RebuildMetabox.php:142
+msgid "Done!"
+msgstr ""
+
+#: application/admin/RebuildMetabox.php:144 application/admin/views/stat.php:69
+msgid "Error"
+msgstr ""
+
+#: application/admin/SiteConfig.php:25
+msgid "Site settings"
+msgstr ""
+
+#: application/admin/SiteConfig.php:46
+msgid "recommended"
+msgstr ""
+
+#: application/admin/SiteConfig.php:50
+msgid "Theming"
+msgstr ""
+
+#: application/admin/SiteConfig.php:56
+msgid "Post status"
+msgstr ""
+
+#: application/admin/SiteConfig.php:57
+msgid "Please manually review each post before sharing."
+msgstr ""
+
+#: application/admin/SiteConfig.php:60
+msgid "Published"
+msgstr ""
+
+#: application/admin/SiteConfig.php:61
+msgid "Pending Review"
+msgstr ""
+
+#: application/admin/SiteConfig.php:62
+msgid "Draft"
+msgstr ""
+
+#: application/admin/SiteConfig.php:67
+msgid "Post author"
+msgstr ""
+
+#: application/admin/SiteConfig.php:73
+msgid "Category for Roundup posts"
+msgstr ""
+
+#: application/admin/SiteConfig.php:79
+msgid "Category for Overview posts"
+msgstr ""
+
+#: application/admin/SiteConfig.php:85
+msgid "Category for Informative posts"
+msgstr ""
+
+#: application/admin/StatController.php:58 application/admin/views/stat.php:22
+msgid "Statistics"
+msgstr ""
+
+#: application/admin/TaskConfig.php:25
+msgid "Create task"
+msgstr ""
+
+#: application/admin/TaskConfig.php:62
+msgid "Everything is ready to start the task."
+msgstr ""
+
+#: application/admin/TaskConfig.php:64
+msgid "We cannot wait to see what you will create with Too Much Niche."
+msgstr ""
+
+#: application/admin/TaskConfig.php:65
+msgid "Make sure to drop us a line once you’ve finished your project!"
+msgstr ""
+
+#: application/admin/TaskConfig.php:69
+msgid "Send notification"
+msgstr ""
+
+#: application/admin/TaskConfig.php:70
+msgid "Send a notification to %s when the task is completed."
+msgstr ""
+
+#: application/admin/TaskConfig.php:130
+msgid "Can't create the task. Please contact support."
+msgstr ""
+
+#: application/admin/TaskConfig.php:143
+msgid "Can't create the task."
+msgstr ""
+
+#: application/admin/TaskConfig.php:149
+msgid "Restart with new key"
+msgstr ""
+
+#: application/admin/views/settings.php:32
+msgid "Please fix the following issues to continue:"
+msgstr ""
+
+#: application/admin/views/settings.php:44
+msgid "Previous"
+msgstr ""
+
+#: application/admin/views/settings.php:49
+msgid "Try again"
+msgstr ""
+
+#: application/admin/views/settings.php:51
+msgid "Submit"
+msgstr ""
+
+#: application/admin/views/settings.php:53
+msgid "Next"
+msgstr ""
+
+#: application/admin/views/stat.php:29
+msgid "Status"
+msgstr ""
+
+#: application/admin/views/stat.php:34
+msgid "In progress"
+msgstr ""
+
+#: application/admin/views/stat.php:36
+msgid "Keyword research"
+msgstr ""
+
+#: application/admin/views/stat.php:38
+msgid "Article generation"
+msgstr ""
+
+#: application/admin/views/stat.php:40
+msgid "Article posting"
+msgstr ""
+
+#: application/admin/views/stat.php:45
+msgid "Start a new task"
+msgstr ""
+
+#: application/admin/views/stat.php:48
+msgid "Please be patient."
+msgstr ""
+
+#: application/admin/views/stat.php:49
+msgid "It may take several hours to create and post all articles."
+msgstr ""
+
+#: application/admin/views/stat.php:52
+msgid ""
+"A notification will be sent to the administrator's email when the task is "
+"completed."
+msgstr ""
+
+#: application/admin/views/stat.php:60
+msgid "Success"
+msgstr ""
+
+#: application/admin/views/stat.php:63
+msgid "Start new task"
+msgstr ""
+
+#: application/admin/views/stat.php:75
+msgid "Community"
+msgstr ""
+
+#: application/admin/views/stat.php:78
+msgid ""
+"Join <a target=\"_blank\" href=\"%s\">TooMuchNiche private group</a> on "
+"Facebook"
+msgstr ""
+
+#: application/admin/views/stat.php:79
+msgid "Your invite code: %s"
+msgstr ""
+
+#: application/admin/views/stat.php:84
+msgid "Cron"
+msgstr ""
+
+#: application/admin/views/stat.php:87
+msgid "The %s constant is set to true. WP cron spawning is disabled."
+msgstr ""
+
+#: application/admin/views/stat.php:88
+msgid "This plugins requires WordPress Cron jobs to be enabled."
+msgstr ""
+
+#: application/admin/views/stat.php:89
+msgid ""
+"If you already have alternative cron runner configured then the plugin would "
+"work fine and you can ignore this notice."
+msgstr ""
+
+#: application/admin/views/stat.php:97
+msgid "Articles posted"
+msgstr ""
+
+#: application/admin/views/stat.php:100
+msgid "%d out of %d"
+msgstr ""
+
+#: application/components/ArticlePoster.php:98
+msgid ""
+"The <em>%s</em> <a target=\"_blank\" href=\"%s\">%s</a> has been posted."
+msgstr ""
+
+#: application/components/ArticlePoster.php:99
+msgid "Products: %d&nbsp;&nbsp;&nbsp;Characters: %d&nbsp;&nbsp;&nbsp;Words: %d"
+msgstr ""
+
+#: application/components/Recipe.php:27
+msgid "Article"
+msgstr ""
+
+#: application/components/Recipe.php:33
+msgid "Product Roundup"
+msgstr ""
+
+#: application/components/Recipe.php:34
+msgid "Product Overview"
+msgstr ""
+
+#: application/components/Recipe.php:35
+msgid "Informative Article"
+msgstr ""
+
+#: application/components/Task.php:71
+msgid "task completed successfully"
+msgstr ""
+
+#: application/components/Task.php:77
+msgid "Website: %s"
+msgstr ""
+
+#: application/components/Task.php:78
+msgid "Niche: %s"
+msgstr ""
+
+#: application/components/Task.php:79
+msgid "Language: %s"
+msgstr ""
+
+#: application/components/Task.php:80
+msgid "Total articles posted: %d"
+msgstr ""
+
+#: application/components/Theme.php:37
+msgid "Greenshift blocks"
+msgstr ""
+
+#: application/components/Theme.php:38
+msgid "Gutenberg blocks"
+msgstr ""
+
+#: application/components/Theme.php:39
+msgid "Basic HTML"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Too Much Niche"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://www.keywordrush.com/toomuchniche"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Too Much Niche."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "keywordrush.com"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://www.keywordrush.com"
+msgstr ""

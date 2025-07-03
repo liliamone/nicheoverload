@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bundle name="Too Much Niche">
+  <domain name="too-much-niche">
+    <project name="Too Much Niche" slug="too-much-niche">
+      <source>
+        <directory>.</directory>
+      </source>
+      <target>
+        <directory>languages</directory>
+      </target>
+      <template>
+        <file>languages/too-much-niche.pot</file>
+      </template>
+    </project>
+  </domain>
+</bundle>

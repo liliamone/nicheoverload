@@ -1,0 +1,130 @@
+/*!
+ * Too Much Niche admin CSS
+ * @author keywordrush.com <support@keywordrush.com>
+ * @link https://www.keywordrush.com
+ * @copyright Copyright &copy; 2025 keywordrush.com
+ *
+ */
+
+#wpcontent {
+    padding-left: 0px;
+    background: #fff;
+}
+
+#footer-thankyou {
+    display: none;
+}
+
+.tmn {
+    background: #fff;
+}
+
+.tmn .form-check-input:checked {
+    background-color: #fff;
+}
+
+.tmn-step {
+    height: 15px;
+    width: 15px;
+    margin: 0 4px;
+    background-color: #bbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.tmn-step.tmn-active {
+    opacity: 1
+}
+
+.tmn-step.tmn-done {
+    background-color: #198754;
+}
+
+.tmn-callout {
+    margin: 0px;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #eee;
+}
+
+.tmn-callout h4 {
+    margin-top: 0;
+}
+
+.tmn-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.tmn-callout-danger {
+    background-color: #fcf2f2;
+    border-color: #dFb5b4;
+}
+
+.tmn-callout-warning {
+    background-color: #fefbed;
+    border-color: #f1e7bc;
+}
+
+.tmn-callout-info {
+    background-color: #f0f7fd;
+    border-color: #d0e3f0;
+}
+
+body.tmn_wait *,
+body.tmn_wait {
+    cursor: progress !important;
+}
+
+.tmn .form-floating > .form-control:not(:-moz-placeholder-shown) ~ label {
+    opacity: 1;
+    color: rgba(0, 0, 0, 0.5);
+    background-color: #fff;
+    height: auto;
+    padding: 0px;
+    padding: 0px 0px 0px 10px;
+    width: 100%;
+    transform: scale(0.982) translateY(0.045rem) translateX(0.1rem);
+    border-radius: 5px 0 0 0;
+}
+.tmn .form-floating > .form-control:focus ~ label,
+.tmn .form-floating > .form-control:not(:placeholder-shown) ~ label,
+.tmn .form-floating > .form-select ~ label {
+    opacity: 1;
+    color: rgba(0, 0, 0, 0.5);
+    background-color: #fff;
+    height: auto;
+    padding: 0px 0px 0px 10px;
+    width: 100%;
+    transform: scale(0.982) translateY(0.045rem) translateX(0.1rem);
+    border-radius: 5px 0 0 0;
+}
+.tmn .form-floating > .form-control:-webkit-autofill ~ label {
+    opacity: 1;
+    color: rgba(0, 0, 0, 0.5);
+    background-color: #fff;
+    height: auto;
+    padding: 0px;
+    padding: 0px 0px 0px 10px;
+    width: 100%;
+    transform: scale(0.982) translateY(0.045rem) translateX(0.1rem);
+    border-radius: 5px 0 0 0;
+}
+
+    .tmn .remove-btn {
+      background: transparent;
+      border: none;
+      color: #6C757D;
+      cursor: pointer;
+      padding: 0.25rem;
+      font-size: 1rem;
+    }
+
+    .tmn .accordion-button.disabled {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .tmn .list-group-item {
+      margin: 0px;
+    }
