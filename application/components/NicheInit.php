@@ -212,7 +212,7 @@ class NicheInit
     public function isCeRequired()
     {
         if (empty($this->niche['recipes']))
-            return array();
+            return false;
 
         foreach ($this->niche['recipes'] as $r)
         {

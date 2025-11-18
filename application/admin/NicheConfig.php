@@ -169,6 +169,11 @@ class NicheConfig extends WizardBootConfig
                 'callback' => array($this, 'render_hidden'),
                 'default' => 'no',
             );
+            // Also hide main_module when ce_integration is 'no'
+            $options['main_module'] = array(
+                'callback' => array($this, 'render_hidden'),
+                'default' => '',
+            );
         }
 
         return $options;
@@ -339,10 +344,19 @@ class NicheConfig extends WizardBootConfig
                 const mainModuleSection = document.getElementById('main_module_section');
                 const mainModuleSelect = document.getElementById('label-main_module');
 
+                // Check if elements exist before manipulating them
+                if (!ceIntegrationSection || !mainModuleSection || !mainModuleSelect) {
+                    // Elements don't exist (probably hidden), exit gracefully
+                    return;
+                }
+
                 const ceIntegrationRadios = ceIntegrationSection.querySelectorAll('input[name="independent-niche_niche[ce_integration]"]');
 
                 function toggleMainModuleSection() {
-                    const selectedValue = document.querySelector('input[name="independent-niche_niche[ce_integration]"]:checked').value;
+                    const selectedRadio = document.querySelector('input[name="independent-niche_niche[ce_integration]"]:checked');
+                    if (!selectedRadio) return;
+
+                    const selectedValue = selectedRadio.value;
                     if (selectedValue === 'no') {
                         mainModuleSection.style.display = 'none';
                         mainModuleSelect.removeAttribute('required');
