@@ -46,7 +46,7 @@ defined('\ABSPATH') || exit; ?>
 
                     <div class="col-12 mt-4">
                         <?php if (Wizard::getInstance()->getCurrentStep() > 1) : ?>
-                            <?php $previous_url = wp_nonce_url(\get_admin_url(\get_current_blog_id(), 'admin.php?page=independent-niche&action=indniche-previous'), 'wizard_nonce'); ?>
+                            <?php $previous_url = wp_nonce_url(\get_admin_url(\get_current_blog_id(), 'admin.php?page=independent-niche-wizard&action=ind-previous'), 'wizard_nonce'); ?>
                             <a id="ind_previous" class="btn btn-secondary" href="<?php echo esc_attr($previous_url); ?>" role="button">&#8592; <?php echo esc_attr(__('Previous', 'independent-niche')); ?></a>
                         <?php endif; ?>
 
@@ -60,8 +60,8 @@ defined('\ABSPATH') || exit; ?>
 
                     ?>
 
-                    <button id="tmn_submit" class="btn btn-primary" href="<?php echo esc_attr($previous_url); ?>" role="button"><?php echo $btn_text; ?></button>
-                    <input id="tmn_real_submit" type="submit" style="display:none;">
+                    <button id="ind_submit" class="btn btn-primary" type="button"><?php echo $btn_text; ?></button>
+                    <input id="ind_real_submit" type="submit" style="display:none;">
                 </div>
             </form>
         </div>
@@ -70,13 +70,17 @@ defined('\ABSPATH') || exit; ?>
 
 <script>
     jQuery(document).ready(function($) {
-        jQuery('#tmn_submit').on('click', function(e) {
-            if (!$('#wizard_form')[0].checkValidity())
-                return true;
+        jQuery('#ind_submit').on('click', function(e) {
+            e.preventDefault();
+            if (!$('#wizard_form')[0].checkValidity()) {
+                $('#wizard_form')[0].reportValidity();
+                return false;
+            }
             var this_btn = $(this);
             this_btn.attr('disabled', true);
-            jQuery('body').addClass('tmn_wait');
-            jQuery('#tmn_real_submit').click();
+            this_btn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <?php _e("Processing...", "independent-niche"); ?>');
+            jQuery('body').addClass('ind_wait');
+            jQuery('#ind_real_submit').click();
             return false;
         });
     });

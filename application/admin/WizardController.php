@@ -53,7 +53,7 @@ class WizardController
             $this->actionRegenerate();
         }
 
-        if (!empty($_GET['action']) && $_GET['action'] == 'tmniche-previous')
+        if (!empty($_GET['action']) && $_GET['action'] == 'ind-previous')
         {
             $this->actionPrevius();
             return;
@@ -153,7 +153,7 @@ class WizardController
 
         Wizard::getInstance()->setCurrentStep(3);
 
-        $redirect_url = \get_admin_url(\get_current_blog_id(), 'admin.php?page=' . Plugin::getSlug());
+        $redirect_url = \get_admin_url(\get_current_blog_id(), 'admin.php?page=' . Plugin::getSlug() . '-wizard');
 
         \wp_safe_redirect($redirect_url);
         exit;
@@ -204,7 +204,7 @@ class WizardController
 
         Wizard::getInstance()->setCurrentStep($step - 1);
 
-        $redirect_url = \get_admin_url(\get_current_blog_id(), 'admin.php?page=' . Plugin::getSlug());
+        $redirect_url = \get_admin_url(\get_current_blog_id(), 'admin.php?page=' . Plugin::getSlug() . '-wizard');
 
         \wp_safe_redirect($redirect_url);
         exit;

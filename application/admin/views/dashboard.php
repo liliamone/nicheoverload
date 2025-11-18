@@ -5,7 +5,7 @@ use IndependentNiche\application\Plugin;
 use IndependentNiche\application\components\Task;
 
 $task_status = Task::getInstance()->getStatus();
-$setup_url = \get_admin_url(\get_current_blog_id(), 'admin.php?page=' . Plugin::getSlug());
+$setup_url = \get_admin_url(\get_current_blog_id(), 'admin.php?page=' . Plugin::getSlug() . '-wizard');
 ?>
 
 <div class="wrap ind ind-dashboard">
