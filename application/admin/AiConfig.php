@@ -35,11 +35,14 @@ class AiConfig extends WizardBootConfig
     {
         return array(
             'deepseek_api_key' => array(
-                'title' => __('DeepSeek API Key', 'independent-niche'),
+                'title' => __('🔑 DeepSeek API Key', 'independent-niche'),
                 'callback' => array($this, 'render_input'),
                 'default' => '',
                 'required' => true,
-                'description' => __('Enter your DeepSeek API key. Get one at https://platform.deepseek.com', 'independent-niche'),
+                'section' => 'default',
+                'class' => 'ind-api-key-input',
+                'placeholder' => 'sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+                'description' => '<div class="ind-api-notice"><strong>⚠️ Required:</strong> Get your API key at <a href="https://platform.deepseek.com" target="_blank">https://platform.deepseek.com</a><br>💡 This key is stored locally and used only for content generation.</div>',
                 'validator' => array(
                     array(
                         'call' => array('\IndependentNiche\application\helpers\FormValidator', 'required'),
@@ -90,11 +93,18 @@ class AiConfig extends WizardBootConfig
                 'maxlength' => 255,
                 'default' => '',
             ),
-            'ai_police' => array(
-                'description' => '<div class="py-3" role="alert">'
-                    . sprintf(__('By using this plugin, you agree to OpenAI\'s <a target="_blank" href="%s">Usage policy</a> and <a target="_blank" href="%s">Sharing & Publication policy</a>.', 'independent-niche'), 'https://openai.com/policies/usage-policies', 'https://openai.com/policies/sharing-publication-policy')
+            'ai_notice' => array(
+                'description' => '<div class="ind-notice ind-notice-info">'
+                    . '<h4>📘 About DeepSeek AI</h4>'
+                    . '<p>DeepSeek is a powerful AI model optimized for content generation. By using this plugin with DeepSeek API, you agree to <a target="_blank" href="https://platform.deepseek.com/terms">DeepSeek\'s Terms of Service</a>.</p>'
+                    . '<p><strong>Features:</strong></p>'
+                    . '<ul>'
+                    . '<li>✅ High-quality content generation</li>'
+                    . '<li>✅ Multi-language support</li>'
+                    . '<li>✅ SEO-optimized articles</li>'
+                    . '<li>✅ Cost-effective pricing</li>'
+                    . '</ul>'
                     . '</div>',
-
                 'callback' => array($this, 'render_text'),
             ),
         );

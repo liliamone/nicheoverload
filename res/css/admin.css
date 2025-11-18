@@ -1,130 +1,608 @@
 /*!
- * Too Much Niche admin CSS
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
- *
+ * Independent Niche Generator - Professional Admin CSS
+ * @author Independent Developer
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
+ * Modern, clean, and professional design
  */
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
 
 #wpcontent {
     padding-left: 0px;
-    background: #fff;
+    background: #f8f9fa;
 }
 
 #footer-thankyou {
     display: none;
 }
 
-.tmn {
-    background: #fff;
+.ind {
+    background: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.tmn .form-check-input:checked {
-    background-color: #fff;
+/* ========================================
+   CARDS & CONTAINERS
+   ======================================== */
+
+.ind-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 24px;
+    margin-bottom: 24px;
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
 }
 
-.tmn-step {
-    height: 15px;
-    width: 15px;
-    margin: 0 4px;
-    background-color: #bbb;
+.ind-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+.ind-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+.ind-card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ind-card-title::before {
+    content: "🚀";
+    font-size: 24px;
+}
+
+/* ========================================
+   FORM ELEMENTS
+   ======================================== */
+
+.ind .form-control,
+.ind .form-select {
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    background: #ffffff;
+}
+
+.ind .form-control:focus,
+.ind .form-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    outline: none;
+}
+
+.ind .form-control:hover,
+.ind .form-select:hover {
+    border-color: #cbd5e1;
+}
+
+.ind-api-key-input {
+    font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    background: #f9fafb !important;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.ind .btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.2s ease;
     border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ind .btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.25);
+}
+
+.ind .btn-primary:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    box-shadow: 0 6px 10px rgba(59, 130, 246, 0.35);
+    transform: translateY(-2px);
+}
+
+.ind .btn-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.25);
+}
+
+.ind .btn-success:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    box-shadow: 0 6px 10px rgba(16, 185, 129, 0.35);
+    transform: translateY(-2px);
+}
+
+.ind .btn-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    box-shadow: 0 4px 6px rgba(239, 68, 68, 0.25);
+}
+
+.ind .btn-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    box-shadow: 0 4px 6px rgba(245, 158, 11, 0.25);
+}
+
+.ind .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* ========================================
+   NOTICES & ALERTS
+   ======================================== */
+
+.ind-notice {
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 4px solid;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.ind-notice h4 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ind-notice p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.ind-notice ul {
+    margin: 12px 0 0 0;
+    padding-left: 20px;
+}
+
+.ind-notice ul li {
+    margin: 6px 0;
+    line-height: 1.5;
+}
+
+.ind-notice-info {
+    background: #eff6ff;
+    border-left-color: #3b82f6;
+    color: #1e40af;
+}
+
+.ind-notice-success {
+    background: #f0fdf4;
+    border-left-color: #10b981;
+    color: #065f46;
+}
+
+.ind-notice-warning {
+    background: #fffbeb;
+    border-left-color: #f59e0b;
+    color: #92400e;
+}
+
+.ind-notice-error,
+.ind-notice-danger {
+    background: #fef2f2;
+    border-left-color: #ef4444;
+    color: #991b1b;
+}
+
+.ind-api-notice {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-top: 8px;
+    border-left: 4px solid #3b82f6;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.ind-api-notice strong {
+    color: #1e40af;
+    font-weight: 600;
+}
+
+.ind-api-notice a {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid #93c5fd;
+}
+
+.ind-api-notice a:hover {
+    color: #1d4ed8;
+    border-bottom-color: #2563eb;
+}
+
+/* ========================================
+   PROGRESS & STATUS
+   ======================================== */
+
+.ind-step {
+    height: 16px;
+    width: 16px;
+    margin: 0 6px;
+    background-color: #cbd5e1;
+    border: 2px solid #e5e7eb;
     border-radius: 50%;
     display: inline-block;
-    opacity: 0.5;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.tmn-step.tmn-active {
-    opacity: 1
+.ind-step.ind-active {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-color: #1d4ed8;
+    transform: scale(1.2);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
 }
 
-.tmn-step.tmn-done {
-    background-color: #198754;
+.ind-step.ind-done {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-color: #047857;
 }
 
-.tmn-callout {
-    margin: 0px;
-    padding: 15px 30px 15px 15px;
-    border-left: 5px solid #eee;
+.ind-step.ind-done::after {
+    content: "✓";
+    color: white;
+    font-size: 10px;
+    position: absolute;
+    transform: translate(-50%, -50%);
 }
 
-.tmn-callout h4 {
+/* ========================================
+   CALLOUTS
+   ======================================== */
+
+.ind-callout {
+    margin: 20px 0;
+    padding: 20px 24px;
+    border-left: 4px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f9fafb;
+}
+
+.ind-callout h4 {
     margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 17px;
+    font-weight: 600;
 }
 
-.tmn-callout p:last-child {
+.ind-callout p:last-child {
     margin-bottom: 0;
 }
 
-.tmn-callout-danger {
-    background-color: #fcf2f2;
-    border-color: #dFb5b4;
+.ind-callout-danger {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border-left-color: #ef4444;
 }
 
-.tmn-callout-warning {
-    background-color: #fefbed;
-    border-color: #f1e7bc;
+.ind-callout-warning {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border-left-color: #f59e0b;
 }
 
-.tmn-callout-info {
-    background-color: #f0f7fd;
-    border-color: #d0e3f0;
+.ind-callout-info {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-left-color: #3b82f6;
 }
 
-body.tmn_wait *,
-body.tmn_wait {
+.ind-callout-success {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-left-color: #10b981;
+}
+
+/* ========================================
+   LOADING STATES
+   ======================================== */
+
+body.ind_wait *,
+body.ind_wait {
     cursor: progress !important;
 }
 
-.tmn .form-floating > .form-control:not(:-moz-placeholder-shown) ~ label {
-    opacity: 1;
-    color: rgba(0, 0, 0, 0.5);
-    background-color: #fff;
-    height: auto;
-    padding: 0px;
-    padding: 0px 0px 0px 10px;
-    width: 100%;
-    transform: scale(0.982) translateY(0.045rem) translateX(0.1rem);
-    border-radius: 5px 0 0 0;
-}
-.tmn .form-floating > .form-control:focus ~ label,
-.tmn .form-floating > .form-control:not(:placeholder-shown) ~ label,
-.tmn .form-floating > .form-select ~ label {
-    opacity: 1;
-    color: rgba(0, 0, 0, 0.5);
-    background-color: #fff;
-    height: auto;
-    padding: 0px 0px 0px 10px;
-    width: 100%;
-    transform: scale(0.982) translateY(0.045rem) translateX(0.1rem);
-    border-radius: 5px 0 0 0;
-}
-.tmn .form-floating > .form-control:-webkit-autofill ~ label {
-    opacity: 1;
-    color: rgba(0, 0, 0, 0.5);
-    background-color: #fff;
-    height: auto;
-    padding: 0px;
-    padding: 0px 0px 0px 10px;
-    width: 100%;
-    transform: scale(0.982) translateY(0.045rem) translateX(0.1rem);
-    border-radius: 5px 0 0 0;
+.ind-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(59, 130, 246, 0.2);
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: ind-spin 0.8s linear infinite;
 }
 
-    .tmn .remove-btn {
-      background: transparent;
-      border: none;
-      color: #6C757D;
-      cursor: pointer;
-      padding: 0.25rem;
-      font-size: 1rem;
+@keyframes ind-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========================================
+   FORM FLOATING LABELS
+   ======================================== */
+
+.ind .form-floating > .form-control:not(:-moz-placeholder-shown) ~ label {
+    opacity: 1;
+    color: #6b7280;
+    background-color: #ffffff;
+    height: auto;
+    padding: 0px 8px;
+    width: auto;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+    border-radius: 4px;
+}
+
+.ind .form-floating > .form-control:focus ~ label,
+.ind .form-floating > .form-control:not(:placeholder-shown) ~ label,
+.ind .form-floating > .form-select ~ label {
+    opacity: 1;
+    color: #3b82f6;
+    background-color: #ffffff;
+    height: auto;
+    padding: 0px 8px;
+    width: auto;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.ind .form-floating > .form-control:-webkit-autofill ~ label {
+    opacity: 1;
+    color: #6b7280;
+    background-color: #ffffff;
+    height: auto;
+    padding: 0px 8px;
+    width: auto;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+    border-radius: 4px;
+}
+
+/* ========================================
+   TABLES
+   ======================================== */
+
+.ind table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.ind table thead {
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+}
+
+.ind table thead th {
+    padding: 16px;
+    font-weight: 600;
+    color: #374151;
+    text-align: left;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.ind table tbody tr {
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.ind table tbody tr:hover {
+    background: #f9fafb;
+}
+
+.ind table tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+/* ========================================
+   ACCORDION & LIST ITEMS
+   ======================================== */
+
+.ind .remove-btn {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.ind .remove-btn:hover {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.ind .accordion-button.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.ind .list-group-item {
+    margin: 0px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    padding: 14px 18px;
+    transition: all 0.2s ease;
+}
+
+.ind .list-group-item:hover {
+    background: #f9fafb;
+    border-color: #cbd5e1;
+}
+
+/* ========================================
+   BADGES & TAGS
+   ======================================== */
+
+.ind-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.ind-badge-primary {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.ind-badge-success {
+    background: #dcfce7;
+    color: #065f46;
+}
+
+.ind-badge-warning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.ind-badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.ind-mb-4 {
+    margin-bottom: 24px;
+}
+
+.ind-mt-4 {
+    margin-top: 24px;
+}
+
+.ind-text-center {
+    text-align: center;
+}
+
+.ind-text-muted {
+    color: #6b7280;
+}
+
+.ind-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #e5e7eb 50%, transparent 100%);
+    margin: 24px 0;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+    .ind-card {
+        padding: 16px;
+        border-radius: 8px;
     }
 
-    .tmn .accordion-button.disabled {
-      pointer-events: none;
-      opacity: 0.6;
+    .ind-card-title {
+        font-size: 18px;
     }
 
-    .tmn .list-group-item {
-      margin: 0px;
+    .ind .btn {
+        padding: 10px 20px;
+        font-size: 14px;
     }
+
+    .ind .form-control,
+    .ind .form-select {
+        font-size: 14px;
+        padding: 10px 14px;
+    }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes ind-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ind-animate-in {
+    animation: ind-fade-in 0.4s ease-out;
+}
+
+/* ========================================
+   CUSTOM SCROLLBAR
+   ======================================== */
+
+.ind ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.ind ::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 10px;
+}
+
+.ind ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.ind ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* ========================================
+   BACKWARD COMPATIBILITY (tmn classes)
+   ======================================== */
+
+.tmn { @extend .ind; }
+.tmn-step { @extend .ind-step; }
+.tmn-active { @extend .ind-active; }
+.tmn-done { @extend .ind-done; }
+.tmn-callout { @extend .ind-callout; }
+.tmn-callout-danger { @extend .ind-callout-danger; }
+.tmn-callout-warning { @extend .ind-callout-warning; }
+.tmn-callout-info { @extend .ind-callout-info; }
+body.tmn_wait { @extend body.ind_wait; }

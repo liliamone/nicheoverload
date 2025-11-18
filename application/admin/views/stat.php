@@ -19,7 +19,7 @@ else
     <?php endif; ?>
 <?php endif; ?>
 
-<div class="tmn">
+<div class="ind ind-animate-in">
     <div class="cegg5-container">
         <div class="col-12 p-2 p-md-4 pb-md-0">
 
@@ -90,7 +90,7 @@ else
 
                                     <a
                                         class="btn btn-primary btn-sm d-flex align-items-center justify-content-between"
-                                        href="<?php echo esc_url(get_admin_url(get_current_blog_id(), 'admin.php?page=too-much-niche')); ?>"
+                                        href="<?php echo esc_url(get_admin_url(get_current_blog_id(), 'admin.php?page=independent-niche')); ?>"
                                         title="<?php echo esc_attr(__('Start New Task', 'independent-niche')); ?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
@@ -117,7 +117,7 @@ else
                                         <?php if ($task->isStatusWorking()): ?>
                                             <a
                                                 class="btn btn-outline-danger btn-sm d-flex align-items-center justify-content-between"
-                                                href="<?php echo esc_url(get_admin_url(get_current_blog_id(), 'admin.php?page=too-much-niche-articles&action=stop_task&_wpnonce=' . wp_create_nonce('tmn_stop_task'))); ?>"
+                                                href="<?php echo esc_url(get_admin_url(get_current_blog_id(), 'admin.php?page=independent-niche-articles&action=stop_task&_wpnonce=' . wp_create_nonce('tmn_stop_task'))); ?>"
                                                 onclick="return confirm('Are you sure you want to stop the generation?');"
                                                 title="<?php echo esc_attr(__('Stop Generation', 'independent-niche')); ?>">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stop-fill" viewBox="0 0 16 16">
@@ -152,7 +152,7 @@ else
                                     <div class="text-end">
                                         <a style="width: 100px;" title="<?php echo esc_html(__('Post without Cron', 'independent-niche')); ?>"
                                             class="btn btn-outline-info btn-sm"
-                                            href="<?php echo \get_admin_url(\get_current_blog_id(), 'admin.php?page=too-much-niche-articles&action=post_now&_wpnonce=' . \wp_create_nonce('tmn_post_manually')); ?>">
+                                            href="<?php echo \get_admin_url(\get_current_blog_id(), 'admin.php?page=independent-niche-articles&action=post_now&_wpnonce=' . \wp_create_nonce('tmn_post_manually')); ?>">
                                             <?php echo esc_html(__('Post Now', 'independent-niche')); ?>
                                         </a>
                                     </div>
@@ -226,7 +226,7 @@ else
     }
 </style>
 
-<div class="tmn">
+<div class="ind ind-animate-in">
     <div class="cegg5-container">
         <div class="col-sm-12 col-md-12 p-2 p-md-4">
             <div class="fs-4">
@@ -234,7 +234,7 @@ else
 
                 <a class="ms-2 link-secondary"
                     title="<?php echo esc_attr(__('Reset Posted Articles Log', 'independent-niche')); ?>"
-                    href="<?php echo esc_url(get_admin_url(get_current_blog_id(), 'admin.php?page=too-much-niche-articles&action=reset_log&_wpnonce=' . wp_create_nonce('tmn_reset_log'))); ?>"
+                    href="<?php echo esc_url(get_admin_url(get_current_blog_id(), 'admin.php?page=independent-niche-articles&action=reset_log&_wpnonce=' . wp_create_nonce('tmn_reset_log'))); ?>"
                     onclick="return confirm('Are you sure you want to reset the posted articles log?');">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-x" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M6.146 6.146a.5.5 0 0 1 .708 0L8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 0 1 0-.708" />
