@@ -1,29 +1,28 @@
 <?php
 
-namespace TooMuchNiche\application\admin;
+namespace IndependentNiche\application\admin;
 
-use TooMuchNiche\application\components\NicheApi;
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\components\Wizard;
-use TooMuchNiche\application\components\Task;
-use TooMuchNiche\application\models\LogModel;
-use TooMuchNiche\application\TaskScheduler;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\components\Wizard;
+use IndependentNiche\application\components\Task;
+use IndependentNiche\application\models\LogModel;
+use IndependentNiche\application\TaskScheduler;
 
-use function TooMuchNiche\prn;
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prn;
+use function IndependentNiche\prnx;
 
 defined('\ABSPATH') || exit;
 
 /**
  * StatController class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class StatController
 {
-    const slug = 'too-much-niche-articles';
+    const slug = 'independent-niche-articles';
 
     public function __construct()
     {
@@ -36,7 +35,7 @@ class StatController
     {
         if (!empty($_GET['action']) && $_GET['action'] == 'restart')
         {
-            if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce(sanitize_key($_GET['_wpnonce']), 'tmn_restart'))
+            if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce(sanitize_key($_GET['_wpnonce']), 'ind_restart'))
                 die('Invalid nonce');
 
             if (isset($_GET['restartniche']) && (int) $_GET['restartniche'])
@@ -56,7 +55,7 @@ class StatController
 
         if (!empty($_GET['action']) && $_GET['action'] == 'post_now')
         {
-            if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce(sanitize_key($_GET['_wpnonce']), 'tmn_post_manually'))
+            if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce(sanitize_key($_GET['_wpnonce']), 'ind_post_manually'))
                 die('Invalid nonce');
 
             Task::getInstance()->proccessArticles();
@@ -64,18 +63,18 @@ class StatController
 
         if (!empty($_GET['action']) && $_GET['action'] == 'stop_task')
         {
-            if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce(sanitize_key($_GET['_wpnonce']), 'tmn_stop_task'))
+            if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce(sanitize_key($_GET['_wpnonce']), 'ind_stop_task'))
                 die('Invalid nonce');
 
-            if ($r = NicheApi::get('/stop'))
-                Task::getInstance()->setStatus(Task::STATUS_STOPPING);
+            // Plus d'appel API - arrêter la tâche directement
+            Task::getInstance()->setStatus(Task::STATUS_STOPPING);
 
             \wp_safe_redirect(\get_admin_url(\get_current_blog_id(), 'admin.php?page=' . Plugin::getSlug() . '-articles'));
         }
 
         if (!empty($_GET['action']) && $_GET['action'] == 'reset_log')
         {
-            if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce(sanitize_key($_GET['_wpnonce']), 'tmn_reset_log'))
+            if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce(sanitize_key($_GET['_wpnonce']), 'ind_reset_log'))
                 die('Invalid nonce');
 
             LogModel::model()->cleanAllLogs();
@@ -91,7 +90,7 @@ class StatController
 
     public function add_admin_menu()
     {
-        \add_submenu_page(Plugin::slug, __('Posted Articles', 'too-much-niche') . ' &lsaquo; ' . Plugin::getName(), __('Posted Articles', 'too-much-niche'), 'publish_posts', self::slug, array($this, 'actionIndex'));
+        \add_submenu_page(Plugin::slug, __('Posted Articles', 'independent-niche') . ' &lsaquo; ' . Plugin::getName(), __('Posted Articles', 'independent-niche'), 'publish_posts', self::slug, array($this, 'actionIndex'));
     }
 
     public function actionIndex()

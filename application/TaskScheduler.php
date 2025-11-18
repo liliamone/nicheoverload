@@ -1,18 +1,18 @@
 <?php
 
-namespace TooMuchNiche\application;
+namespace IndependentNiche\application;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\components\Scheduler;
-use TooMuchNiche\application\components\Task;
+use IndependentNiche\application\components\Scheduler;
+use IndependentNiche\application\components\Task;
 
 /**
  * TaskScheduler class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class TaskScheduler extends Scheduler
 {

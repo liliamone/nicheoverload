@@ -1,24 +1,24 @@
 <?php
 
-namespace TooMuchNiche\application\admin;
+namespace IndependentNiche\application\admin;
 
-use TooMuchNiche\application\components\ArticlePoster;
-use TooMuchNiche\application\models\ArticleModel;
-use TooMuchNiche\application\components\Theme;
-use TooMuchNiche\application\components\Recipe;
-use TooMuchNiche\application\components\NicheInit;
+use IndependentNiche\application\components\ArticlePoster;
+use IndependentNiche\application\models\ArticleModel;
+use IndependentNiche\application\components\Theme;
+use IndependentNiche\application\components\Recipe;
+use IndependentNiche\application\components\NicheInit;
 
-use function TooMuchNiche\prn;
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prn;
+use function IndependentNiche\prnx;
 
 defined('\ABSPATH') || exit;
 
 /**
  * RebuildMetabox class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class RebuildMetabox
 {
@@ -89,7 +89,7 @@ class RebuildMetabox
                     echo '<div class="components-panel__row">';
                     echo '<label>';
                     echo '<input id="tmniche_restore_products" type="checkbox">';
-                    echo esc_html(__('Restore products', 'too-much-niche')) . ' (' . esc_html(self::countProducts($ce_data)) . ')';
+                    echo esc_html(__('Restore products', 'independent-niche')) . ' (' . esc_html(self::countProducts($ce_data)) . ')';
                     echo '</label>';
                     echo '</div>';
                 }
@@ -104,7 +104,7 @@ class RebuildMetabox
         <?php if ($is_rebuild_allowed): ?>
             <div style="padding-top: 10px;">
                 <?php \wp_nonce_field('tmniche_rebuild_article', 'tmn_nonce'); ?>
-                <input type="submit" id="tmniche_rebuild_article" class="components-button is-secondary" value="<?php echo \esc_attr(__('Restore from Local Cache', 'too-much-niche')); ?>">
+                <input type="submit" id="tmniche_rebuild_article" class="components-button is-secondary" value="<?php echo \esc_attr(__('Restore from Local Cache', 'independent-niche')); ?>">
                 <div class="clear"></div>
             </div>
             <script>
@@ -149,7 +149,7 @@ class RebuildMetabox
             $regen_url = get_admin_url(get_current_blog_id(), 'admin.php?page=too-much-niche&action=regenerate&post_id=' . $post->ID);
             $regen_url = wp_nonce_url($regen_url, 'tmn_regenerate_article');
             ?>
-            <a href="<?php echo esc_url($regen_url); ?>" id="tmniche_regenerate_article" class="components-button is-secondary is-destructive" style="padding-top: 0px; padding-bottom: 0px;"><?php echo \esc_attr(__('Regenerate Content (Beta)', 'too-much-niche')); ?></a>
+            <a href="<?php echo esc_url($regen_url); ?>" id="tmniche_regenerate_article" class="components-button is-secondary is-destructive" style="padding-top: 0px; padding-bottom: 0px;"><?php echo \esc_attr(__('Regenerate Content (Beta)', 'independent-niche')); ?></a>
             <div class="clear"></div>
         <?php endif; //$is_regen_allowed
         ?>
@@ -174,9 +174,9 @@ class RebuildMetabox
 
         $ap = new ArticlePoster;
         if ($ap->rebuildPost($post_id, $theme_id, $restore_products))
-            echo '<span style="color: green;">' . esc_html(__('Done!', 'too-much-niche')) . '</span>';
+            echo '<span style="color: green;">' . esc_html(__('Done!', 'independent-niche')) . '</span>';
         else
-            echo '<span style="color: red;">' . esc_html(__('Error', 'too-much-niche')) . '</span>';
+            echo '<span style="color: red;">' . esc_html(__('Error', 'independent-niche')) . '</span>';
 
         \wp_die();
     }

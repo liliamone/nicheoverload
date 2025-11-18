@@ -1,29 +1,29 @@
 <?php
 
-namespace TooMuchNiche\application\admin;
+namespace IndependentNiche\application\admin;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\components\NicheInit;
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\components\WizardBootConfig;
+use IndependentNiche\application\components\NicheInit;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\components\WizardBootConfig;
 
-use function TooMuchNiche\prn;
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prn;
+use function IndependentNiche\prnx;
 
 /**
  * KeywordConfig class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class KeywordConfig extends WizardBootConfig
 {
 
     public function getTitle()
     {
-        return __('Article Settings', 'too-much-niche');
+        return __('Article Settings', 'independent-niche');
     }
 
     public function option_name()
@@ -51,25 +51,25 @@ class KeywordConfig extends WizardBootConfig
             $i++;
         }
 
-        $d = __('Article Keywords & Products', 'too-much-niche') . ' ';
+        $d = __('Article Keywords & Products', 'independent-niche') . ' ';
         if (NicheConfig::isManualModule())
-            $d .= __('(Required)', 'too-much-niche');
+            $d .= __('(Required)', 'independent-niche');
         else
-            $d .= __('(Optional)', 'too-much-niche');
+            $d .= __('(Optional)', 'independent-niche');
 
         $d = '<div class="mt-4">' . $d . '</div>';
 
         if (NicheConfig::isManualModule())
         {
             $d .= '<div class="form-text"><p>'
-                . sprintf(__('For the %s module, you must manually set <a target="_blank" href="%s">keywords</a> and <a target="_blank" href="%s">products</a> for each article. Automatic product research is not currently supported for this module.', 'too-much-niche'), NicheConfig::getMainModuleName(), 'https://tmniche-docs.keywordrush.com/advanced-use/select-keywords', 'https://tmniche-docs.keywordrush.com/advanced-use/select-products') . '</p>'
+                . sprintf(__('For the %s module, you must manually set <a target="_blank" href="%s">keywords</a> and <a target="_blank" href="%s">products</a> for each article. Automatic product research is not currently supported for this module.', 'independent-niche'), NicheConfig::getMainModuleName(), 'https://tmniche-docs.keywordrush.com/advanced-use/select-keywords', 'https://tmniche-docs.keywordrush.com/advanced-use/select-products') . '</p>'
                 . '</div>';
         }
         else
         {
             $d .= '<div class="form-text"><p>'
-                . sprintf(__('You can set <a target="_blank" href="%s">keywords</a> and <a target="_blank" href="%s">products</a> for each article, or just for some, and let the plugin find the rest.', 'too-much-niche'), 'https://tmniche-docs.keywordrush.com/advanced-use/select-keywords', 'https://tmniche-docs.keywordrush.com/advanced-use/select-products') . '</p>'
-                . '<p>' . __('If you leave these fields empty, the plugin will select keywords automatically.', 'too-much-niche') . '</p>'
+                . sprintf(__('You can set <a target="_blank" href="%s">keywords</a> and <a target="_blank" href="%s">products</a> for each article, or just for some, and let the plugin find the rest.', 'independent-niche'), 'https://tmniche-docs.keywordrush.com/advanced-use/select-keywords', 'https://tmniche-docs.keywordrush.com/advanced-use/select-products') . '</p>'
+                . '<p>' . __('If you leave these fields empty, the plugin will select keywords automatically.', 'independent-niche') . '</p>'
                 . '</div>';
         }
 
@@ -117,7 +117,7 @@ class KeywordConfig extends WizardBootConfig
         echo '<div class="row">';
         echo '<div class="mt-2 col-md-9 col-lg-7">';
         echo '<div class="slidecontainer">';
-        echo '<label for="recipeRange' . esc_attr($recipe_id) . '" class="form-label mb-0 d-flex justify-content-between">' . esc_html(sprintf(__('%s:', 'too-much-niche'), $recipe_name)) . ' <span id="articleCountDisplay' . esc_attr($recipe_id) . '" class="value ms-auto fw-bold">0</span></label>';
+        echo '<label for="recipeRange' . esc_attr($recipe_id) . '" class="form-label mb-0 d-flex justify-content-between">' . esc_html(sprintf(__('%s:', 'independent-niche'), $recipe_name)) . ' <span id="articleCountDisplay' . esc_attr($recipe_id) . '" class="value ms-auto fw-bold">0</span></label>';
 
         echo '<input name="' . esc_attr($args['option_name']) . '[' . esc_attr($args['name']) . ']" type="range" class="slider form-range" value="' . esc_attr($value) . '" min="0" max="' . esc_attr($total) . '" id="recipeRange' . esc_attr($recipe_id) . '">';
         echo '<span class="max visually-hidden">0</span>';
@@ -246,13 +246,13 @@ class KeywordConfig extends WizardBootConfig
 
         if ($sum > $total)
         {
-            \add_settings_error($first_key, $first_key, sprintf(__('The total count of articles must be less than %d.', 'too-much-niche'), $total));
+            \add_settings_error($first_key, $first_key, sprintf(__('The total count of articles must be less than %d.', 'independent-niche'), $total));
             return false;
         }
 
         if ($sum <= 0)
         {
-            \add_settings_error($first_key, $first_key, __('The number of articles must be greater than zero.', 'too-much-niche'));
+            \add_settings_error($first_key, $first_key, __('The number of articles must be greater than zero.', 'independent-niche'));
             return false;
         }
 
@@ -386,9 +386,9 @@ class KeywordConfig extends WizardBootConfig
 
     public  function loadCodemirror()
     {
-        \wp_enqueue_style('tmn-codemirror', \TooMuchNiche\PLUGIN_RES . '/codemirror/codemirror.min.css');
-        \wp_enqueue_script('tmn-codemirror', \TooMuchNiche\PLUGIN_RES . '/codemirror/codemirror.min.js');
-        \wp_enqueue_script('tmn-codemirror-placeholder', \TooMuchNiche\PLUGIN_RES . '/codemirror/placeholder.js');
+        \wp_enqueue_style('tmn-codemirror', \IndependentNiche\PLUGIN_RES . '/codemirror/codemirror.min.css');
+        \wp_enqueue_script('tmn-codemirror', \IndependentNiche\PLUGIN_RES . '/codemirror/codemirror.min.js');
+        \wp_enqueue_script('tmn-codemirror-placeholder', \IndependentNiche\PLUGIN_RES . '/codemirror/placeholder.js');
     }
 
     public function render_keywords_accordion($args)
@@ -406,22 +406,22 @@ class KeywordConfig extends WizardBootConfig
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title" id="bulkImportModalLabel"><?php echo esc_html(__('Import Keywords & Products', 'too-much-niche')); ?> - <span id="bulkImportSectionName"></span></h6>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php esc_attr_e('Close', 'too-much-niche'); ?>"></button>
+                        <h6 class="modal-title" id="bulkImportModalLabel"><?php echo esc_html(__('Import Keywords & Products', 'independent-niche')); ?> - <span id="bulkImportSectionName"></span></h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php esc_attr_e('Close', 'independent-niche'); ?>"></button>
                     </div>
                     <div class="modal-body">
-                        <p><?php echo esc_html(__('Please paste your data in the following format (CSV):', 'too-much-niche')); ?></p>
+                        <p><?php echo esc_html(__('Please paste your data in the following format (CSV):', 'independent-niche')); ?></p>
                         <pre class="bg-light p-3 rounded">
 "Keyword","Use As Title","Product IDs"
 "Keyword 1","true","prod1;prod2;prod3"
 "Keyword 2","false","prod4;prod5"
 "Keyword 3","true","prod6;prod7;prod8"
                     </pre>
-                        <textarea class="form-control" id="bulkImportTextarea" rows="10" placeholder="<?php echo esc_attr(__('Paste your CSV data here...', 'too-much-niche')); ?>"></textarea>
+                        <textarea class="form-control" id="bulkImportTextarea" rows="10" placeholder="<?php echo esc_attr(__('Paste your CSV data here...', 'independent-niche')); ?>"></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo esc_html(__('Close', 'too-much-niche')); ?></button>
-                        <button type="button" class="btn btn-primary" id="importBulkData"><?php echo esc_html(__('Import', 'too-much-niche')); ?></button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo esc_html(__('Close', 'independent-niche')); ?></button>
+                        <button type="button" class="btn btn-primary" id="importBulkData"><?php echo esc_html(__('Import', 'independent-niche')); ?></button>
                     </div>
                 </div>
             </div>
@@ -433,17 +433,17 @@ class KeywordConfig extends WizardBootConfig
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title"><?php echo esc_html(__('Keyword Tool', 'too-much-niche')); ?> - <span id="keywordToolSectionName"></span></h6>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php esc_attr_e('Close', 'too-much-niche'); ?>"></button>
+                        <h6 class="modal-title"><?php echo esc_html(__('Keyword Tool', 'independent-niche')); ?> - <span id="keywordToolSectionName"></span></h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php esc_attr_e('Close', 'independent-niche'); ?>"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <input type="text" id="keyword-tool-input" class="form-control" placeholder="<?php echo esc_attr(__('Type your keyword here...', 'too-much-niche')); ?>">
+                            <input type="text" id="keyword-tool-input" class="form-control" placeholder="<?php echo esc_attr(__('Type your keyword here...', 'independent-niche')); ?>">
                         </div>
                         <ul class="list-group suggestions-list" id="keyword-tool-suggestions-list"></ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php esc_attr_e('Close', 'too-much-niche'); ?></button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php esc_attr_e('Close', 'independent-niche'); ?></button>
                     </div>
                 </div>
             </div>
@@ -470,13 +470,13 @@ class KeywordConfig extends WizardBootConfig
                             <div class="groups-container mb-2" data-section="<?php echo esc_attr($id); ?>"></div>
                             <div class="btn-group ms-4" role="group">
                                 <button class="add-more-keywords-btn btn btn-primary btn-sm" data-section="<?php echo esc_attr($id); ?>">
-                                    <?php echo esc_html(__('Add keyword', 'too-much-niche')); ?>
+                                    <?php echo esc_html(__('Add keyword', 'independent-niche')); ?>
                                 </button>
                                 <button type="button" class="btn btn-outline-primary btn-sm keyword-tool-btn" data-section="<?php echo esc_attr($id); ?>" data-bs-toggle="modal" data-bs-target="#keywordToolModal">
-                                    <?php echo esc_html(__('Keyword tool', 'too-much-niche')); ?>
+                                    <?php echo esc_html(__('Keyword tool', 'independent-niche')); ?>
                                 </button>
                                 <button type="button" class="btn btn-outline-primary btn-sm bulk-import-btn" data-section="<?php echo esc_attr($id); ?>" data-bs-toggle="modal" data-bs-target="#bulkImportModal">
-                                    <?php echo esc_html(__('Import', 'too-much-niche')); ?>
+                                    <?php echo esc_html(__('Import', 'independent-niche')); ?>
                                 </button>
                             </div>
                         </div>
@@ -490,7 +490,7 @@ class KeywordConfig extends WizardBootConfig
         <template id="keywordGroupTemplate">
             <div class="keyword-group m-0 mb-2 border1">
                 <div class="position-relative m-0 p-0 ps-2">
-                    <button type="button" class="remove-btn position-absolute top-0 end-0 me-1 mt-1" title="<?php echo esc_attr(__('Remove this keyword', 'too-much-niche')); ?>" aria-label="Remove keyword">
+                    <button type="button" class="remove-btn position-absolute top-0 end-0 me-1 mt-1" title="<?php echo esc_attr(__('Remove this keyword', 'independent-niche')); ?>" aria-label="Remove keyword">
                         <span class="dashicons dashicons-no"></span>
                     </button>
                     <span class="article-number badge bg-primary position-absolute top-0 start-0 translate-middle mt-3">1</span>
@@ -501,7 +501,7 @@ class KeywordConfig extends WizardBootConfig
                                 type="text"
                                 maxlength="255"
                                 class="form-control form-control-sm keyword-input"
-                                placeholder="<?php echo esc_attr(__('Main keyword or Article title', 'too-much-niche')); ?>" />
+                                placeholder="<?php echo esc_attr(__('Main keyword or Article title', 'independent-niche')); ?>" />
 
                             <input
                                 type="hidden"
@@ -511,9 +511,9 @@ class KeywordConfig extends WizardBootConfig
 
                         <div class="col-auto d-flex align-items-center">
                             <div class="form-check">
-                                <label class="form-check-label" title="<?php echo esc_attr(__('Use this keyword as the article title', 'too-much-niche')); ?>">
+                                <label class="form-check-label" title="<?php echo esc_attr(__('Use this keyword as the article title', 'independent-niche')); ?>">
                                     <input class="form-check-input title-switch" value="true" type="checkbox">
-                                    <span style="font-size:0.85rem;"><?php echo esc_html(__('Use as Title', 'too-much-niche')); ?></span>
+                                    <span style="font-size:0.85rem;"><?php echo esc_html(__('Use as Title', 'independent-niche')); ?></span>
                                 </label>
                             </div>
                         </div>
@@ -523,13 +523,13 @@ class KeywordConfig extends WizardBootConfig
                                 <button
                                     type="button"
                                     class="btn btn-sm btn-outline-primary add-products-link position-relative"
-                                    title="<?php echo esc_attr(__('Add products', 'too-much-niche')); ?>"
+                                    title="<?php echo esc_attr(__('Add products', 'independent-niche')); ?>"
                                     data-product-textarea=""
                                     data-bs-toggle="collapse"
                                     aria-expanded="false"
                                     aria-controls="">
                                     <span class="products_added_flag position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle d-none">
-                                        <span class="visually-hidden"><?php esc_html_e('Products added', 'too-much-niche'); ?></span>
+                                        <span class="visually-hidden"><?php esc_html_e('Products added', 'independent-niche'); ?></span>
                                     </span>
                                     <span class="dashicons dashicons-products"></span>
                                 </button>
@@ -603,7 +603,7 @@ class KeywordConfig extends WizardBootConfig
 
                     // If we've reached the limit, do not add more
                     if (document.querySelectorAll(`.groups-container[data-section="${sectionId}"] .keyword-group`).length >= articleCounts[sectionId]) {
-                        alert('<?php echo esc_js(__('Maximum number of keyword groups reached for this article type.', 'too-much-niche')); ?>');
+                        alert('<?php echo esc_js(__('Maximum number of keyword groups reached for this article type.', 'independent-niche')); ?>');
                         return;
                     }
 
@@ -726,7 +726,7 @@ class KeywordConfig extends WizardBootConfig
                         lineNumbers: true,
                         lineWrapping: false,
                         autofocus: true,
-                        placeholder: "<?php echo esc_js(__('Enter product IDs or URLs, one per line', 'too-much-niche')); ?>"
+                        placeholder: "<?php echo esc_js(__('Enter product IDs or URLs, one per line', 'independent-niche')); ?>"
                     });
 
                     editor.getWrapperElement().style.fontSize = "0.85rem";
@@ -842,7 +842,7 @@ class KeywordConfig extends WizardBootConfig
                 function handleBulkImport() {
                     const bulkData = document.getElementById('bulkImportTextarea').value.trim();
                     if (!bulkData) {
-                        alert('<?php echo esc_js(__('Please paste your data.', 'too-much-niche')); ?>');
+                        alert('<?php echo esc_js(__('Please paste your data.', 'independent-niche')); ?>');
                         return;
                     }
 
@@ -852,7 +852,7 @@ class KeywordConfig extends WizardBootConfig
                         .map(l => l.trim())
                         .filter(l => l !== '');
                     if (lines.length === 0) {
-                        alert('<?php echo esc_js(__('No data found.', 'too-much-niche')); ?>');
+                        alert('<?php echo esc_js(__('No data found.', 'independent-niche')); ?>');
                         return;
                     }
 
@@ -888,14 +888,14 @@ class KeywordConfig extends WizardBootConfig
 
                     const startIndex = hasHeader ? 1 : 0;
                     if (lines.length <= startIndex) {
-                        alert('<?php echo esc_js(__('No data lines found.', 'too-much-niche')); ?>');
+                        alert('<?php echo esc_js(__('No data lines found.', 'independent-niche')); ?>');
                         return;
                     }
 
                     // The section we are importing into
                     const sectionId = currentImportSectionId;
                     if (!sectionId || articleCounts[sectionId] === 0) {
-                        alert('<?php echo esc_js(__('Invalid section selected for import.', 'too-much-niche')); ?>');
+                        alert('<?php echo esc_js(__('Invalid section selected for import.', 'independent-niche')); ?>');
                         return;
                     }
 
@@ -915,7 +915,7 @@ class KeywordConfig extends WizardBootConfig
 
                         const currentCount = document.querySelectorAll(`.groups-container[data-section="${sectionId}"] .keyword-group`).length;
                         if (currentCount >= articleCounts[sectionId]) {
-                            alert('<?php echo esc_js(__('Maximum number of keyword groups reached for this article type.', 'too-much-niche')); ?>');
+                            alert('<?php echo esc_js(__('Maximum number of keyword groups reached for this article type.', 'independent-niche')); ?>');
                             break;
                         }
 
@@ -1056,14 +1056,14 @@ class KeywordConfig extends WizardBootConfig
                         displayKeywordToolSuggestions(suggestions);
                     } catch (error) {
                         console.error('Error fetching suggestions:', error);
-                        keywordToolSuggestionsList.innerHTML = '<li class="list-group-item"><?php echo esc_js(__('Error fetching suggestions.', 'too-much-niche')); ?></li>';
+                        keywordToolSuggestionsList.innerHTML = '<li class="list-group-item"><?php echo esc_js(__('Error fetching suggestions.', 'independent-niche')); ?></li>';
                     }
                 }
 
                 function displayKeywordToolSuggestions(suggestions) {
                     keywordToolSuggestionsList.innerHTML = '';
                     if (!suggestions || suggestions.length === 0) {
-                        keywordToolSuggestionsList.innerHTML = '<li class="list-group-item"><?php echo esc_js(__('No suggestions found.', 'too-much-niche')); ?></li>';
+                        keywordToolSuggestionsList.innerHTML = '<li class="list-group-item"><?php echo esc_js(__('No suggestions found.', 'independent-niche')); ?></li>';
                     } else {
                         suggestions.forEach(suggestion => {
                             const listItem = document.createElement('a');

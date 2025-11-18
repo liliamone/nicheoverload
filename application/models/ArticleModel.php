@@ -1,19 +1,19 @@
 <?php
 
-namespace TooMuchNiche\application\models;
+namespace IndependentNiche\application\models;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\Plugin;
+use IndependentNiche\application\Plugin;
 
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prnx;
 
 /**
  * ArticleModel class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class ArticleModel extends Model
 {

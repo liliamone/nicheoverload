@@ -1,21 +1,21 @@
 <?php
 
-namespace TooMuchNiche\application;
+namespace IndependentNiche\application;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\admin\SiteConfig;
-use TooMuchNiche\application\components\Scheduler;
-use TooMuchNiche\application\models\ArticleModel;
+use IndependentNiche\application\admin\SiteConfig;
+use IndependentNiche\application\components\Scheduler;
+use IndependentNiche\application\models\ArticleModel;
 
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prnx;
 
 /**
  * PostScheduler class file (deprecated)
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class PostScheduler extends Scheduler
 {

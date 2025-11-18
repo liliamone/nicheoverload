@@ -1,22 +1,21 @@
 <?php
 
-namespace TooMuchNiche\application\admin;
+namespace IndependentNiche\application\admin;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\admin\RebuildMetabox;
-use TooMuchNiche\application\components\Task;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\admin\RebuildMetabox;
+use IndependentNiche\application\components\Task;
 
-use function TooMuchNiche\prn;
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prn;
+use function IndependentNiche\prnx;
 
 /**
  * PluginAdmin class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class PluginAdmin
 {
@@ -41,7 +40,7 @@ class PluginAdmin
         \add_action('admin_enqueue_scripts', array($this, 'admin_load_scripts'));
         \add_filter('parent_file', array($this, 'highlight_admin_menu'));
         \add_action('admin_menu', array($this, 'add_admin_menu'));
-        \add_action('after_plugin_row_too-much-niche/too-much-niche.php', array($this, 'after_row_notice'));
+        \add_action('after_plugin_row_independent-niche/independent-niche.php', array($this, 'after_row_notice'));
 
         new RebuildMetabox;
         new WizardController;
@@ -58,13 +57,13 @@ class PluginAdmin
         if (count($page_pats) < 3 || $page_pats[0] . '-' . $page_pats[1] . '-' . $page_pats[2] != Plugin::slug())
             return;
 
-        \wp_enqueue_style('tmn-bootstrap', \TooMuchNiche\PLUGIN_RES . '/bootstrap/css/bootstrap.css');
-        \wp_enqueue_script('tmn-bootstrap', \TooMuchNiche\PLUGIN_RES . '/bootstrap/js/bootstrap.bundle.min.js');
+        \wp_enqueue_style('ind-bootstrap', \IndependentNiche\PLUGIN_RES . '/bootstrap/css/bootstrap.css');
+        \wp_enqueue_script('ind-bootstrap', \IndependentNiche\PLUGIN_RES . '/bootstrap/js/bootstrap.bundle.min.js');
 
         $v = Plugin::version();
         if (Plugin::isDevEnvironment())
             $v .= '_' . rand(1, 100);
-        \wp_enqueue_style(Plugin::slug() . '-admin', \TooMuchNiche\PLUGIN_RES . '/css/admin.css', array(), $v);
+        \wp_enqueue_style(Plugin::slug() . '-admin', \IndependentNiche\PLUGIN_RES . '/css/admin.css', array(), $v);
     }
 
     public function add_admin_menu()
@@ -79,7 +78,7 @@ class PluginAdmin
         else
             $data = $_data;
 
-        include \TooMuchNiche\PLUGIN_PATH . 'application/admin/views/' . PluginAdmin::sanitize($view_name) . '.php';
+        include \IndependentNiche\PLUGIN_PATH . 'application/admin/views/' . PluginAdmin::sanitize($view_name) . '.php';
     }
 
     function highlight_admin_menu($file)
@@ -90,7 +89,7 @@ class PluginAdmin
             return $file;
 
         if (strstr($plugin_page, Plugin::slug() . '-settings-'))
-            $plugin_page = 'too-much-niche-settings';
+            $plugin_page = 'independent-niche-settings';
 
         return $file;
     }
@@ -105,8 +104,8 @@ class PluginAdmin
         if ($status != Task::STATUS_WORKING)
             return;
 
-        $m = __('Article generation is currently in progress. Please do not uninstall the plugin!', 'too-much-niche');
-        echo '<tr class="active tmniche-notice-row"><th class="check-column"></th><td colspan="4" class="plugin-title column-primary"><div style="padding: 10px;background-color: #fff3cd;border: 1px solid #ffeeba;margin: 5px 0;color:#856404;" class="tmniche-custom-notice">' . $m . '</div></td></tr>';
+        $m = __('Article generation is currently in progress. Please do not uninstall the plugin!', 'independent-niche');
+        echo '<tr class="active indniche-notice-row"><th class="check-column"></th><td colspan="4" class="plugin-title column-primary"><div style="padding: 10px;background-color: #fff3cd;border: 1px solid #ffeeba;margin: 5px 0;color:#856404;" class="indniche-custom-notice">' . $m . '</div></td></tr>';
     }
 
     static public function sanitize($str)

@@ -1,17 +1,16 @@
 <?php
 
-namespace TooMuchNiche;
+namespace IndependentNiche;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\vendor\CVarDumper;
+use IndependentNiche\application\vendor\CVarDumper;
 
 /**
  * AutoLoader class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class AutoLoader
 {

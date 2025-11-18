@@ -1,21 +1,21 @@
 <?php
 
-namespace TooMuchNiche\application\admin;
+namespace IndependentNiche\application\admin;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\models\LogModel;
-use TooMuchNiche\application\components\logger\Logger;
-use TooMuchNiche\application\Plugin;
+use IndependentNiche\application\models\LogModel;
+use IndependentNiche\application\components\logger\Logger;
+use IndependentNiche\application\Plugin;
 
-use function TooMuchNiche\prn;
+use function IndependentNiche\prn;
 
 /**
  * LogTable class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class LogTable extends MyListTable
 {

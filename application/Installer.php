@@ -1,20 +1,19 @@
 <?php
 
-namespace TooMuchNiche\application;
+namespace IndependentNiche\application;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\components\NicheInit;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\components\NicheInit;
 
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prnx;
 
 /**
  * Installer class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class Installer
 {
@@ -94,7 +93,7 @@ class Installer
         if (!$errors)
             return;
         unset($_GET['activate']);
-        \deactivate_plugins(\plugin_basename(\TooMuchNiche\PLUGIN_FILE));
+        \deactivate_plugins(\plugin_basename(\IndependentNiche\PLUGIN_FILE));
         $e = sprintf('<div class="error"><p>%1$s</p><p><em>%2$s</em> ' . 'cannot be installed!' . '</p></div>', join('</p><p>', $errors), Plugin::name);
         \wp_die($e);
     }
@@ -110,10 +109,10 @@ class Installer
         \delete_option(Plugin::slug . '_stat');
         NicheInit::getInstance()->deleteNiche();
 
-        $options = array('LicConfig', 'CeConfig', 'NicheConfig', 'SiteConfig', 'TaskConfig', 'AiConfig', 'KeywordConfig');
+        $options = array('CeConfig', 'NicheConfig', 'SiteConfig', 'TaskConfig', 'AiConfig', 'KeywordConfig');
         foreach ($options as $option)
         {
-            $m = "\\TooMuchNiche\\application\\admin\\" . $option;
+            $m = "\\IndependentNiche\\application\\admin\\" . $option;
             \delete_option($m::getInstance()->option_name());
         }
 
@@ -121,7 +120,7 @@ class Installer
 
         foreach ($models as $model)
         {
-            $m = "\\TooMuchNiche\\application\\models\\" . $model;
+            $m = "\\IndependentNiche\\application\\models\\" . $model;
             $m::model()->dropTable();
         }
     }
@@ -141,7 +140,7 @@ class Installer
         $sql = '';
         foreach ($models as $model)
         {
-            $m = "\\TooMuchNiche\\application\\models\\" . $model;
+            $m = "\\IndependentNiche\\application\\models\\" . $model;
             $sql .= $m::model()->getDump();
             $sql .= "\r\n";
         }

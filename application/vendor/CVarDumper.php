@@ -1,6 +1,6 @@
 <?php
 
-namespace TooMuchNiche\application\vendor;
+namespace IndependentNiche\application\vendor;
 
 defined('\ABSPATH') || exit;
 /**

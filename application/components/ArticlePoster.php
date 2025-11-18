@@ -1,24 +1,24 @@
 <?php
 
-namespace TooMuchNiche\application\components;
+namespace IndependentNiche\application\components;
 
-use TooMuchNiche\application\admin\SiteConfig;
-use TooMuchNiche\application\models\ArticleModel;
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\components\Theme;
-use TooMuchNiche\application\helpers\ImageHelper;
+use IndependentNiche\application\admin\SiteConfig;
+use IndependentNiche\application\models\ArticleModel;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\components\Theme;
+use IndependentNiche\application\helpers\ImageHelper;
 
-use function TooMuchNiche\prn;
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prn;
+use function IndependentNiche\prnx;
 
 defined('\ABSPATH') || exit;
 
 /**
  * ArticlePoster class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class ArticlePoster
 {
@@ -179,25 +179,25 @@ class ArticlePoster
             $items = array();
 
         if ($article['post_id'])
-            $m = __('has been updated', 'too-much-niche');
+            $m = __('has been updated', 'independent-niche');
         elseif ($post_status == 'schedule')
-            $m = __('has been sheduled', 'too-much-niche');
+            $m = __('has been sheduled', 'independent-niche');
         elseif ($post_status == 'draft')
-            $m = __('has been posted with draft status', 'too-much-niche');
+            $m = __('has been posted with draft status', 'independent-niche');
         elseif ($post_status == 'pending')
-            $m = __('has been posted with pending status', 'too-much-niche');
+            $m = __('has been posted with pending status', 'independent-niche');
         else
-            $m = __('has been posted', 'too-much-niche');
+            $m = __('has been posted', 'independent-niche');
 
-        $message = sprintf(__('The <em>%s</em> <a target="_blank" href="%s">%s</a>', 'too-much-niche'), Recipe::getRecipeName($article['recipe_id']), \get_permalink($post_id), $article['title']);
+        $message = sprintf(__('The <em>%s</em> <a target="_blank" href="%s">%s</a>', 'independent-niche'), Recipe::getRecipeName($article['recipe_id']), \get_permalink($post_id), $article['title']);
         $message .= ' ' . $m . '.';
-        $message .= '<div class="text-muted">' . sprintf(__('Words: %d', 'too-much-niche'), $article['word_count']);
+        $message .= '<div class="text-muted">' . sprintf(__('Words: %d', 'independent-niche'), $article['word_count']);
 
         if (count($items))
-            $message .= sprintf(__('&nbsp;&nbsp;&nbsp;Products: %d', 'too-much-niche'), count($items));
+            $message .= sprintf(__('&nbsp;&nbsp;&nbsp;Products: %d', 'independent-niche'), count($items));
 
         if (count($comments))
-            $message .= sprintf(__('&nbsp;&nbsp;&nbsp;Comments: %d', 'too-much-niche'), self::countAllComments($comments));
+            $message .= sprintf(__('&nbsp;&nbsp;&nbsp;Comments: %d', 'independent-niche'), self::countAllComments($comments));
 
         $message .= '</div>';
 

@@ -1,17 +1,17 @@
 <?php
 
-namespace TooMuchNiche\application\components;
+namespace IndependentNiche\application\components;
 
-use TooMuchNiche\application\Plugin;
+use IndependentNiche\application\Plugin;
 
 defined('\ABSPATH') || exit;
 
 /**
  * Wizard class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class Wizard
 {

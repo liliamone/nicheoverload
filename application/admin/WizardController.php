@@ -1,26 +1,26 @@
 <?php
 
-namespace TooMuchNiche\application\admin;
+namespace IndependentNiche\application\admin;
 
-use TooMuchNiche\application\components\ArticlePoster;
-use TooMuchNiche\application\components\NicheInit;
-use TooMuchNiche\application\components\Recipe;
-use TooMuchNiche\application\components\Task;
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\components\Wizard;
-use TooMuchNiche\application\models\ArticleModel;
+use IndependentNiche\application\components\ArticlePoster;
+use IndependentNiche\application\components\NicheInit;
+use IndependentNiche\application\components\Recipe;
+use IndependentNiche\application\components\Task;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\components\Wizard;
+use IndependentNiche\application\models\ArticleModel;
 
-use function TooMuchNiche\prn;
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prn;
+use function IndependentNiche\prnx;
 
 defined('\ABSPATH') || exit;
 
 /**
  * WizardController class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class WizardController
 {
@@ -89,10 +89,11 @@ class WizardController
 
     private function actionRegenerate()
     {
-        if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce(\sanitize_key($_GET['_wpnonce']), 'tmn_regenerate_article'))
+        if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce(\sanitize_key($_GET['_wpnonce']), 'ind_regenerate_article'))
             die('Invalid nonce');
 
-        if (!LicConfig::getInstance()->option('license_key') || !NicheConfig::getInstance()->option('niche') || !NicheInit::getInstance()->getRemainingCredits())
+        // Plus de vérification de licence - vérifier seulement la niche
+        if (!NicheConfig::getInstance()->option('niche') || !NicheInit::getInstance()->getRemainingCredits())
             return;
 
         $post_id = isset($_GET['post_id']) ? (int) $_GET['post_id'] : 0;
@@ -148,7 +149,7 @@ class WizardController
             )
         );
 
-        update_option('too-much-niche_keywords', $config);
+        update_option('independent-niche_keywords', $config);
 
         Wizard::getInstance()->setCurrentStep(3);
 
@@ -160,7 +161,8 @@ class WizardController
 
     public function actionStep1()
     {
-        LicConfig::getInstance()->adminInit();
+        // Plus de configuration de licence nécessaire
+        NicheConfig::getInstance()->adminInit();
     }
 
     public function actionStep2()

@@ -1,32 +1,32 @@
 <?php
 
-namespace TooMuchNiche\application\admin;
+namespace IndependentNiche\application\admin;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\components\WizardBootConfig;
-use TooMuchNiche\application\components\Theme;
-use TooMuchNiche\application\components\NicheInit;
-use TooMuchNiche\application\helpers\WpHelper;
-use TooMuchNiche\application\models\ArticleModel;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\components\WizardBootConfig;
+use IndependentNiche\application\components\Theme;
+use IndependentNiche\application\components\NicheInit;
+use IndependentNiche\application\helpers\WpHelper;
+use IndependentNiche\application\models\ArticleModel;
 
-use function TooMuchNiche\prn;
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prn;
+use function IndependentNiche\prnx;
 
 /**
  * SiteConfig class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class SiteConfig extends WizardBootConfig
 {
 
     public function getTitle()
     {
-        return __('Site Settings', 'too-much-niche');
+        return __('Site Settings', 'independent-niche');
     }
 
     public function option_name()
@@ -40,7 +40,7 @@ class SiteConfig extends WizardBootConfig
         foreach (Theme::getThemesList() as $id => $name)
         {
             if ($id == Theme::THEME_GREENSHIFT)
-                $name .= ' (' . __('recommended', 'too-much-niche') . ')';
+                $name .= ' (' . __('recommended', 'independent-niche') . ')';
             $themes[$id . '.'] = $name;
         }
 
@@ -48,101 +48,101 @@ class SiteConfig extends WizardBootConfig
 
         $options = array(
             'theming' => array(
-                'title' => __('Theming', 'too-much-niche'),
-                'description' => !$is_greenshift_installed ? __('The Greenshift plugin will be automatically installed and activated if it is not already installed.', 'too-much-niche') : '',
+                'title' => __('Theming', 'independent-niche'),
+                'description' => !$is_greenshift_installed ? __('The Greenshift plugin will be automatically installed and activated if it is not already installed.', 'independent-niche') : '',
                 'callback' => array($this, 'render_dropdown'),
                 'dropdown_options' => $themes,
                 'default' => '2.',
                 'validator' => array(
                     array(
                         'call' => array($this, 'checkGreenshiftInstalled'),
-                        'message' => sprintf(__('Please install and activate the <a target="_blank" href="%s">Greenshift - animation and page builder blocks</a> plugin.', 'too-much-niche'), 'https://wordpress.org/plugins/greenshift-animation-and-page-builder-blocks/')
+                        'message' => sprintf(__('Please install and activate the <a target="_blank" href="%s">Greenshift - animation and page builder blocks</a> plugin.', 'independent-niche'), 'https://wordpress.org/plugins/greenshift-animation-and-page-builder-blocks/')
                     ),
                 ),
             ),
             'post_status' => array(
-                'title' => __('Post status', 'too-much-niche'),
+                'title' => __('Post status', 'independent-niche'),
                 'callback' => array($this, 'render_dropdown'),
                 'dropdown_options' => array(
-                    'publish' => __('Publish immediately', 'too-much-niche'),
-                    'pending' => __('Pending', 'too-much-niche'),
-                    'draft' => __('Draft', 'too-much-niche'),
-                    'schedule' => __('Scheduled', 'too-much-niche'),
+                    'publish' => __('Publish immediately', 'independent-niche'),
+                    'pending' => __('Pending', 'independent-niche'),
+                    'draft' => __('Draft', 'independent-niche'),
+                    'schedule' => __('Scheduled', 'independent-niche'),
                 ),
                 'default' => self::getDefaultPostStatus(),
             ),
             'post_frequency' => array(
-                'title' => __('Post frequency', 'too-much-niche'),
+                'title' => __('Post frequency', 'independent-niche'),
                 'callback' => array($this, 'render_dropdown'),
                 'dropdown_options' => array(
 
-                    '1-2:day' => __('1-2 per day', 'too-much-niche'),
-                    '1-3:day' => __('1-3 per day', 'too-much-niche'),
-                    '3-5:day' => __('3-5 per day', 'too-much-niche'),
-                    '5-10:day' => __('5-10 per day', 'too-much-niche'),
+                    '1-2:day' => __('1-2 per day', 'independent-niche'),
+                    '1-3:day' => __('1-3 per day', 'independent-niche'),
+                    '3-5:day' => __('3-5 per day', 'independent-niche'),
+                    '5-10:day' => __('5-10 per day', 'independent-niche'),
 
-                    '1-2:week' => __('1-2 per week', 'too-much-niche'),
-                    '1-3:week' => __('1-3 per week', 'too-much-niche'),
-                    '2-5:week' => __('2-5 per week', 'too-much-niche'),
+                    '1-2:week' => __('1-2 per week', 'independent-niche'),
+                    '1-3:week' => __('1-3 per week', 'independent-niche'),
+                    '2-5:week' => __('2-5 per week', 'independent-niche'),
 
-                    '1:day' => __('1 per day', 'too-much-niche'),
-                    '2:day' => __('2 per day', 'too-much-niche'),
-                    '3:day' => __('3 per day', 'too-much-niche'),
-                    '4:day' => __('4 per day', 'too-much-niche'),
-                    '5:day' => __('5 per day', 'too-much-niche'),
-                    '6:day' => __('6 per day', 'too-much-niche'),
-                    '7:day' => __('7 per day', 'too-much-niche'),
-                    '8:day' => __('8 per day', 'too-much-niche'),
-                    '9:day' => __('9 per day', 'too-much-niche'),
-                    '10:day' => __('10 per day', 'too-much-niche'),
-                    '15:day' => __('15 per day', 'too-much-niche'),
-                    '20:day' => __('20 per day', 'too-much-niche'),
+                    '1:day' => __('1 per day', 'independent-niche'),
+                    '2:day' => __('2 per day', 'independent-niche'),
+                    '3:day' => __('3 per day', 'independent-niche'),
+                    '4:day' => __('4 per day', 'independent-niche'),
+                    '5:day' => __('5 per day', 'independent-niche'),
+                    '6:day' => __('6 per day', 'independent-niche'),
+                    '7:day' => __('7 per day', 'independent-niche'),
+                    '8:day' => __('8 per day', 'independent-niche'),
+                    '9:day' => __('9 per day', 'independent-niche'),
+                    '10:day' => __('10 per day', 'independent-niche'),
+                    '15:day' => __('15 per day', 'independent-niche'),
+                    '20:day' => __('20 per day', 'independent-niche'),
                 ),
                 'default' => self::getDefaultPostFrequency(),
             ),
             'scheduled_start' => array(
-                'title' => __('Scheduled start', 'too-much-niche'),
+                'title' => __('Scheduled start', 'independent-niche'),
                 'callback' => array($this, 'render_dropdown'),
                 'dropdown_options' => self::getScheduledStartOptions(),
                 'default' => 'now',
             ),
             'generate_comments' => array(
-                'title' => __('Generate user comments', 'too-much-niche'),
+                'title' => __('Generate user comments', 'independent-niche'),
                 'callback' => array($this, 'render_dropdown'),
                 'dropdown_options' => array(
-                    'enabled' => __('Enabled', 'too-much-niche'),
-                    'disabled' => __('Disabled', 'too-much-niche'),
+                    'enabled' => __('Enabled', 'independent-niche'),
+                    'disabled' => __('Disabled', 'independent-niche'),
                 ),
                 'default' => 'enabled',
             ),
             /*
             'generate_slug' => array(
-                'title' => __('Generate post slug', 'too-much-niche'),
+                'title' => __('Generate post slug', 'independent-niche'),
                 'callback' => array($this, 'render_hidden'),
                 'dropdown_options' => array(
-                    'enabled' => __('Enabled', 'too-much-niche'),
-                    'disabled' => __('Disabled', 'too-much-niche'),
+                    'enabled' => __('Enabled', 'independent-niche'),
+                    'disabled' => __('Disabled', 'independent-niche'),
                 ),
                 'default' => 'enabled',
             ),
             */
             'generate_tags' => array(
-                'title' => __('Generate tags', 'too-much-niche'),
+                'title' => __('Generate tags', 'independent-niche'),
                 'callback' => array($this, 'render_dropdown'),
                 'dropdown_options' => array(
-                    'enabled' => __('Enabled', 'too-much-niche'),
-                    'disabled' => __('Disabled', 'too-much-niche'),
+                    'enabled' => __('Enabled', 'independent-niche'),
+                    'disabled' => __('Disabled', 'independent-niche'),
                 ),
                 'default' => 'disabled',
             ),
             'post_author' => array(
-                'title' => __('Post author', 'too-much-niche'),
+                'title' => __('Post author', 'independent-niche'),
                 'callback' => array($this, 'render_dropdown'),
                 'dropdown_options' => self::getUsers(),
                 'default' => \get_current_user_id() . '.',
             ),
             'separator' => array(
-                'description' => '<div class="mb-2 mt-4">' . __('Choose Article Categories', 'too-much-niche') . '</div>',
+                'description' => '<div class="mb-2 mt-4">' . __('Choose Article Categories', 'independent-niche') . '</div>',
                 'callback' => array($this, 'render_text'),
             ),
             'render_js' => array(
@@ -153,7 +153,7 @@ class SiteConfig extends WizardBootConfig
         $recipes = NicheInit::getInstance()->getInitRecipes(NicheConfig::isCeIntegration());
         foreach ($recipes as $recipe_id => $recipe_name)
         {
-            $title = sprintf(__('Category for %s', 'too-much-niche'), $recipe_name);
+            $title = sprintf(__('Category for %s', 'independent-niche'), $recipe_name);
             $option_id = 'category' . $recipe_id;
             $options[$option_id] = array(
                 'title' => $title,
@@ -210,11 +210,11 @@ class SiteConfig extends WizardBootConfig
     public static function getScheduledStartOptions()
     {
         $options = array(
-            'now' => __('Now', 'too-much-niche'),
+            'now' => __('Now', 'independent-niche'),
         );
 
         if (ArticleModel::model()->count('order_id > 0'))
-            $options['after_all'] =  __('After all other tasks', 'too-much-niche');
+            $options['after_all'] =  __('After all other tasks', 'independent-niche');
 
         return $options;
     }

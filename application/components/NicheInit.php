@@ -1,20 +1,19 @@
 <?php
 
-namespace TooMuchNiche\application\components;
+namespace IndependentNiche\application\components;
 
-use \TooMuchNiche\application\Plugin;
+use \IndependentNiche\application\Plugin;
 
-use function TooMuchNiche\prn;
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prn;
+use function IndependentNiche\prnx;
 
 defined('\ABSPATH') || exit;
 
 /**
  * NicheInit class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class NicheInit
 {
@@ -36,20 +35,67 @@ class NicheInit
 
     public function initializeNicheFromApi()
     {
-        $result = NicheApi::get('/init');
+        try {
+            $deepseek = new DeepSeekClient();
+            $niche_config = \IndependentNiche\application\admin\NicheConfig::getInstance();
 
-        if ($result && !empty($result['status']) && $result['status'] == 'success')
-        {
-            if (!empty($result['niche']) && is_array($result['niche']))
-            {
-                $this->setNiche($result['niche']);
-                return true;
+            $niche_text = $niche_config->option('niche');
+            $language = $niche_config->option('language', 'English');
+
+            $result = $deepseek->generateNicheData($niche_text, $language);
+
+            if ($result && !is_wp_error($result)) {
+                $niche_data = $this->parseDeepSeekResponse($result);
+                if ($niche_data) {
+                    $this->setNiche($niche_data);
+                    return true;
+                }
             }
-            else
-                return false;
-        }
 
+            return false;
+
+        } catch (\Exception $e) {
+            error_log('Independent Niche Generator Error: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    private function parseDeepSeekResponse($response)
+    {
+        if (isset($response['choices'][0]['message']['content'])) {
+            $content = $response['choices'][0]['message']['content'];
+
+            // Try to extract JSON from the response
+            $json_data = json_decode($content, true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($json_data)) {
+                // Transform DeepSeek response to expected niche format
+                return array(
+                    'keywords' => isset($json_data['keywords']) ? $json_data['keywords'] : array(),
+                    'recipes' => $this->transformRecipes($json_data),
+                    'trending_topics' => isset($json_data['trending_topics']) ? $json_data['trending_topics'] : array(),
+                    'remaining_credits' => 100, // Set default value for independent usage
+                );
+            }
+        }
         return false;
+    }
+
+    private function transformRecipes($json_data)
+    {
+        $recipes = array();
+        if (isset($json_data['recipes']) && is_array($json_data['recipes'])) {
+            $id = 1;
+            foreach ($json_data['recipes'] as $recipe_title) {
+                $recipes[] = array(
+                    'id' => $id++,
+                    'title' => $recipe_title,
+                    'articles' => 10,
+                    'ce_required' => false,
+                    'allocated_credits' => 0,
+                );
+            }
+        }
+        return $recipes;
     }
 
     public function setNiche(array $niche)

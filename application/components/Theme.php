@@ -1,22 +1,22 @@
 <?php
 
-namespace TooMuchNiche\application\components;
+namespace IndependentNiche\application\components;
 
-use TooMuchNiche\application\admin\SiteConfig;
-use TooMuchNiche\application\helpers\ArrayHelper;
-use TooMuchNiche\application\helpers\SchemaHelper;
+use IndependentNiche\application\admin\SiteConfig;
+use IndependentNiche\application\helpers\ArrayHelper;
+use IndependentNiche\application\helpers\SchemaHelper;
 
-use function TooMuchNiche\prn;
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prn;
+use function IndependentNiche\prnx;
 
 defined('\ABSPATH') || exit;
 
 /**
  * Theme class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 
 class Theme
@@ -36,9 +36,9 @@ class Theme
 	public static function getThemesList()
 	{
 		return array(
-			Theme::THEME_GREENSHIFT => __('Greenshift blocks', 'too-much-niche'),
-			Theme::THEME_GUTENBERG => __('Gutenberg blocks', 'too-much-niche'),
-			Theme::THEME_HTML => __('Basic HTML', 'too-much-niche'),
+			Theme::THEME_GREENSHIFT => __('Greenshift blocks', 'independent-niche'),
+			Theme::THEME_GUTENBERG => __('Gutenberg blocks', 'independent-niche'),
+			Theme::THEME_HTML => __('Basic HTML', 'independent-niche'),
 		);
 	}
 

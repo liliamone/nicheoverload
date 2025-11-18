@@ -1,20 +1,19 @@
 <?php
 
-namespace TooMuchNiche\application\admin;
+namespace IndependentNiche\application\admin;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\components\WizardBootConfig;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\components\WizardBootConfig;
 
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prnx;
 
 /**
  * AiConfig class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class AiConfig extends WizardBootConfig
 {
@@ -24,7 +23,7 @@ class AiConfig extends WizardBootConfig
 
     public function getTitle()
     {
-        return __('AI Settings', 'too-much-niche');
+        return __('AI Settings', 'independent-niche');
     }
 
     public function option_name()
@@ -35,54 +34,77 @@ class AiConfig extends WizardBootConfig
     protected function options()
     {
         return array(
+            'deepseek_api_key' => array(
+                'title' => __('🔑 DeepSeek API Key', 'independent-niche'),
+                'callback' => array($this, 'render_input'),
+                'default' => '',
+                'required' => true,
+                'section' => 'default',
+                'class' => 'ind-api-key-input',
+                'placeholder' => 'sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+                'description' => '<div class="ind-api-notice"><strong>⚠️ Required:</strong> Get your API key at <a href="https://platform.deepseek.com" target="_blank">https://platform.deepseek.com</a><br>💡 This key is stored locally and used only for content generation.</div>',
+                'validator' => array(
+                    array(
+                        'call' => array('\IndependentNiche\application\helpers\FormValidator', 'required'),
+                        'message' => sprintf(__('The field "%s" can not be empty.', 'independent-niche'), 'DeepSeek API Key'),
+                    ),
+                ),
+            ),
             'article_size' => array(
-                'title' => __('Article size', 'too-much-niche'),
+                'title' => __('Article size', 'independent-niche'),
                 'callback' => array($this, 'render_dropdown'),
                 'dropdown_options' => array(
-                    self::ARTICLE_SIZE_LARGE . '.'  => __('Large', 'too-much-niche') . ' (' . self::ARTICLE_SIZE_LARGE . '%)',
-                    self::ARTICLE_SIZE_MEDIUM . '.'  => __('Medium', 'too-much-niche') . ' (' . self::ARTICLE_SIZE_MEDIUM . '%)',
-                    self::ARTICLE_SIZE_SMALL . '.' => __('Small', 'too-much-niche') . ' (' . self::ARTICLE_SIZE_SMALL . '%)',
-                    self::ARTICLE_SIZE_MEDIUM . '+' . self::ARTICLE_SIZE_LARGE  => __('Medium or Large', 'too-much-niche') . ' (' . self::ARTICLE_SIZE_MEDIUM . '% or ' . self::ARTICLE_SIZE_LARGE . '%)',
-                    self::ARTICLE_SIZE_SMALL . '+' . self::ARTICLE_SIZE_MEDIUM . '+' . self::ARTICLE_SIZE_LARGE => __('Small, Medium, or Large', 'too-much-niche') . ' (' . self::ARTICLE_SIZE_SMALL . '% or ' . self::ARTICLE_SIZE_MEDIUM . '% or ' . self::ARTICLE_SIZE_LARGE . '%)',
-                    self::ARTICLE_SIZE_SMALL . '+' . self::ARTICLE_SIZE_MEDIUM  => __('Small or Medium', 'too-much-niche') . ' (' . self::ARTICLE_SIZE_SMALL . '% or ' . self::ARTICLE_SIZE_MEDIUM . '%)',
-                    self::ARTICLE_SIZE_MEDIUM . '-' . self::ARTICLE_SIZE_LARGE => __('From Medium to Large', 'too-much-niche') . ' (' . self::ARTICLE_SIZE_MEDIUM . '% - ' . self::ARTICLE_SIZE_LARGE . '%)',
-                    self::ARTICLE_SIZE_SMALL . '-' . self::ARTICLE_SIZE_MEDIUM => __('From Small to Medium', 'too-much-niche') . ' (' . self::ARTICLE_SIZE_SMALL . '% - ' . self::ARTICLE_SIZE_MEDIUM . '%)',
-                    self::ARTICLE_SIZE_SMALL . '-' . self::ARTICLE_SIZE_LARGE => __('From Small to Large', 'too-much-niche') . ' (' . self::ARTICLE_SIZE_SMALL . '% - ' . self::ARTICLE_SIZE_LARGE . '%)',
+                    self::ARTICLE_SIZE_LARGE . '.'  => __('Large', 'independent-niche') . ' (' . self::ARTICLE_SIZE_LARGE . '%)',
+                    self::ARTICLE_SIZE_MEDIUM . '.'  => __('Medium', 'independent-niche') . ' (' . self::ARTICLE_SIZE_MEDIUM . '%)',
+                    self::ARTICLE_SIZE_SMALL . '.' => __('Small', 'independent-niche') . ' (' . self::ARTICLE_SIZE_SMALL . '%)',
+                    self::ARTICLE_SIZE_MEDIUM . '+' . self::ARTICLE_SIZE_LARGE  => __('Medium or Large', 'independent-niche') . ' (' . self::ARTICLE_SIZE_MEDIUM . '% or ' . self::ARTICLE_SIZE_LARGE . '%)',
+                    self::ARTICLE_SIZE_SMALL . '+' . self::ARTICLE_SIZE_MEDIUM . '+' . self::ARTICLE_SIZE_LARGE => __('Small, Medium, or Large', 'independent-niche') . ' (' . self::ARTICLE_SIZE_SMALL . '% or ' . self::ARTICLE_SIZE_MEDIUM . '% or ' . self::ARTICLE_SIZE_LARGE . '%)',
+                    self::ARTICLE_SIZE_SMALL . '+' . self::ARTICLE_SIZE_MEDIUM  => __('Small or Medium', 'independent-niche') . ' (' . self::ARTICLE_SIZE_SMALL . '% or ' . self::ARTICLE_SIZE_MEDIUM . '%)',
+                    self::ARTICLE_SIZE_MEDIUM . '-' . self::ARTICLE_SIZE_LARGE => __('From Medium to Large', 'independent-niche') . ' (' . self::ARTICLE_SIZE_MEDIUM . '% - ' . self::ARTICLE_SIZE_LARGE . '%)',
+                    self::ARTICLE_SIZE_SMALL . '-' . self::ARTICLE_SIZE_MEDIUM => __('From Small to Medium', 'independent-niche') . ' (' . self::ARTICLE_SIZE_SMALL . '% - ' . self::ARTICLE_SIZE_MEDIUM . '%)',
+                    self::ARTICLE_SIZE_SMALL . '-' . self::ARTICLE_SIZE_LARGE => __('From Small to Large', 'independent-niche') . ' (' . self::ARTICLE_SIZE_SMALL . '% - ' . self::ARTICLE_SIZE_LARGE . '%)',
 
                 ),
                 'default' => self::ARTICLE_SIZE_MEDIUM . '+' . self::ARTICLE_SIZE_LARGE,
             ),
             'temperature' => array(
-                'title' => __('Creativity level', 'too-much-niche'),
+                'title' => __('Creativity level', 'independent-niche'),
                 'callback' => array($this, 'render_dropdown'),
                 'dropdown_options' => self::getCreativitiesList(),
                 'default' => '0.75',
             ),
             'point_of_view' => array(
-                'title' => __('Point of view (optional)', 'too-much-niche'),
-                'description' => __('Note: Enabling the "First person" perspective may result in content that reads as if the writer has personal experience with the products.', 'too-much-niche'),
+                'title' => __('Point of view (optional)', 'independent-niche'),
+                'description' => __('Note: Enabling the "First person" perspective may result in content that reads as if the writer has personal experience with the products.', 'independent-niche'),
                 'callback' => array($this, 'render_dropdown'),
-                'dropdown_options' => array_merge(array('' => __('- none -', 'too-much-niche')) + self::getPointOfViews()),
+                'dropdown_options' => array_merge(array('' => __('- none -', 'independent-niche')) + self::getPointOfViews()),
                 'default' => '',
             ),
             'tone' => array(
-                'title' => __('Tone of voice (optional)', 'too-much-niche'),
+                'title' => __('Tone of voice (optional)', 'independent-niche'),
                 'callback' => array($this, 'render_dropdown'),
-                'dropdown_options' => array_merge(array('' => __('- none -', 'too-much-niche')) + self::getTonesList()),
+                'dropdown_options' => array_merge(array('' => __('- none -', 'independent-niche')) + self::getTonesList()),
                 'default' => '',
             ),
             'ai_instructions' => array(
-                'title' => __('Custom AI instructions (optional)', 'too-much-niche'),
-                'description' => __('Guide the AI by providing specific instructions related to tone, audience, or language style. For example: "Use an informal tone in German (casual, use the \'du\' form)" or "Use British English spelling."', 'too-much-niche'),
+                'title' => __('Custom AI instructions (optional)', 'independent-niche'),
+                'description' => __('Guide the AI by providing specific instructions related to tone, audience, or language style. For example: "Use an informal tone in German (casual, use the \'du\' form)" or "Use British English spelling."', 'independent-niche'),
                 'callback' => array($this, 'render_input'),
                 'maxlength' => 255,
                 'default' => '',
             ),
-            'ai_police' => array(
-                'description' => '<div class="py-3" role="alert">'
-                    . sprintf(__('By using this plugin, you agree to OpenAI\'s <a target="_blank" href="%s">Usage policy</a> and <a target="_blank" href="%s">Sharing & Publication policy</a>.', 'too-much-niche'), 'https://openai.com/policies/usage-policies', 'https://openai.com/policies/sharing-publication-policy')
+            'ai_notice' => array(
+                'description' => '<div class="ind-notice ind-notice-info">'
+                    . '<h4>📘 About DeepSeek AI</h4>'
+                    . '<p>DeepSeek is a powerful AI model optimized for content generation. By using this plugin with DeepSeek API, you agree to <a target="_blank" href="https://platform.deepseek.com/terms">DeepSeek\'s Terms of Service</a>.</p>'
+                    . '<p><strong>Features:</strong></p>'
+                    . '<ul>'
+                    . '<li>✅ High-quality content generation</li>'
+                    . '<li>✅ Multi-language support</li>'
+                    . '<li>✅ SEO-optimized articles</li>'
+                    . '<li>✅ Cost-effective pricing</li>'
+                    . '</ul>'
                     . '</div>',
-
                 'callback' => array($this, 'render_text'),
             ),
         );
@@ -95,10 +117,10 @@ class AiConfig extends WizardBootConfig
     public static function getPointOfViews()
     {
         return array(
-            'first_person_singular' => __('First person singular (I, me, my)', 'too-much-niche'),
-            'first_person_plural' => __('First person plural (we, us, our)', 'too-much-niche'),
-            'second_person' => __('Second person (you, your, yours)', 'too-much-niche'),
-            'third_person' => __('Third person (he, she, it, they)', 'too-much-niche'),
+            'first_person_singular' => __('First person singular (I, me, my)', 'independent-niche'),
+            'first_person_plural' => __('First person plural (we, us, our)', 'independent-niche'),
+            'second_person' => __('Second person (you, your, yours)', 'independent-niche'),
+            'third_person' => __('Third person (he, she, it, they)', 'independent-niche'),
         );
     }
 
@@ -161,12 +183,12 @@ class AiConfig extends WizardBootConfig
     public static function getCreativitiesList()
     {
         return array(
-            '0.0' => __('Min (more factual, but repetiteve)', 'too-much-niche'),
-            '0.5' => __('Low', 'too-much-niche'),
-            '0.75' => __('Optimal (default)', 'too-much-niche'),
-            '1.0' => __('Optimal+ (still good and a little more creative)', 'too-much-niche'),
-            '1.1' => __('Hight', 'too-much-niche'),
-            '1.3' => __('Max (less factual, but creative)', 'too-much-niche'),
+            '0.0' => __('Min (more factual, but repetiteve)', 'independent-niche'),
+            '0.5' => __('Low', 'independent-niche'),
+            '0.75' => __('Optimal (default)', 'independent-niche'),
+            '1.0' => __('Optimal+ (still good and a little more creative)', 'independent-niche'),
+            '1.1' => __('Hight', 'independent-niche'),
+            '1.3' => __('Max (less factual, but creative)', 'independent-niche'),
         );
     }
 }

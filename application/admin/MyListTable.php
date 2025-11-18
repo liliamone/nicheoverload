@@ -1,18 +1,18 @@
 <?php
 
-namespace TooMuchNiche\application\admin;
+namespace IndependentNiche\application\admin;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\models\Model;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\models\Model;
 
 /**
  * MyListTable class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 if (!class_exists('\WP_List_Table'))
 {
@@ -109,7 +109,7 @@ class MyListTable extends \WP_List_Table
         $time_diff = $current - $timestamp;
         $readable_time = \get_date_from_gmt(date('Y-m-d H:i:s', $timestamp));
         if ($time_diff >= 0 && $time_diff < \DAY_IN_SECONDS)
-            $time_diff = \human_time_diff($timestamp, $current) . ' ' . __('ago', 'too-much-niche');
+            $time_diff = \human_time_diff($timestamp, $current) . ' ' . __('ago', 'independent-niche');
         else
             $time_diff = $readable_time;
 
@@ -137,7 +137,7 @@ class MyListTable extends \WP_List_Table
     function get_bulk_actions()
     {
         $actions = array(
-            'delete' => __('Delete', 'too-much-niche')
+            'delete' => __('Delete', 'independent-niche')
         );
         return $actions;
     }
