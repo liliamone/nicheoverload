@@ -244,7 +244,7 @@ else
                 </a>
 
             </div>
-            <form id="tmn-log-table" method="GET">
+            <form id="ind-log-table" method="GET">
                 <input type="hidden" name="page" value="<?php echo \esc_attr($_REQUEST['page']); ?>" />
                 <?php $table->views(); ?>
                 <?php $table->display(); ?>

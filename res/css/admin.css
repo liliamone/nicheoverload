@@ -1088,15 +1088,6 @@ body.ind_wait {
 }
 
 /* ========================================
-   BACKWARD COMPATIBILITY (tmn classes)
+   LEGACY COMPATIBILITY REMOVED
+   All tmn- classes have been migrated to ind-
    ======================================== */
-
-.tmn { @extend .ind; }
-.tmn-step { @extend .ind-step; }
-.tmn-active { @extend .ind-active; }
-.tmn-done { @extend .ind-done; }
-.tmn-callout { @extend .ind-callout; }
-.tmn-callout-danger { @extend .ind-callout-danger; }
-.tmn-callout-warning { @extend .ind-callout-warning; }
-.tmn-callout-info { @extend .ind-callout-info; }
-body.tmn_wait { @extend body.ind_wait; }

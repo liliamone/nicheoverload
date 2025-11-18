@@ -66,13 +66,13 @@ class Wizard
     {
         for ($i = 1; $i <= self::TOTAL_STEPS; $i++)
         {
-            echo '<span class="tmn-step';
+            echo '<span class="ind-step';
 
             if ($i == $this->getCurrentStep())
-                echo ' tmn-active';
+                echo ' ind-active';
 
             if ($i < $this->getCurrentStep())
-                echo ' tmn-done';
+                echo ' ind-done';
             echo '">';
             echo '</span>';
         }

@@ -24,7 +24,7 @@ class Theme
 	const THEME_HTML = 0;
 	const THEME_GUTENBERG = 1;
 	const THEME_GREENSHIFT = 2;
-	const CSS_PREFIX = 'tmn-';
+	const CSS_PREFIX = 'ind-';
 	protected $sections;
 
 	public static $themes = array(

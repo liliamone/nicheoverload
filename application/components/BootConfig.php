@@ -258,11 +258,11 @@ abstract class BootConfig extends Config
                 $details['type'] = 'danger';
 
             if (in_array($details['type'], array('danger', 'success', 'warning', 'info'), true))
-                $class = 'tmn-callout-' . $details['type'];
+                $class = 'ind-callout-' . $details['type'];
             else
                 $class = '';
 
-            $output .= '<div class="tmn-callout ' . esc_attr($class) . '">';
+            $output .= '<div class="ind-callout ' . esc_attr($class) . '">';
             $output .= $details['message'];
             $output .= '</div>';
         }
