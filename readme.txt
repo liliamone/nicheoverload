@@ -2,7 +2,7 @@
 Contributors: Independent Developer
 Requires at least: 6.4
 Tested up to: 6.7
-Stable tag: 2.0.0
+Stable tag: 2.1.0
 Requires PHP: 8.0
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -113,6 +113,28 @@ DeepSeek propose une offre gratuite généreuse. Les tarifs payants sont très c
 6. Intégration Content Egg Pro
 
 == Changelog ==
+
+= 2.1.0 - 2025-01-18 =
+**Dashboard Update - Configuration Simplifiée**
+
+* ✨ NEW: Page Dashboard professionnelle avec accueil
+* ✨ NEW: Champ API Key visible sur la première page
+* ✨ NEW: Hero section avec gradient violet élégant
+* ✨ NEW: Carte de configuration API Key mise en avant
+* ✨ NEW: Indicateur de progression circulaire animé
+* ✨ NEW: Quick Actions pour navigation rapide
+* ✨ NEW: Statut de configuration en temps réel
+* ✨ NEW: Ressources et liens utiles intégrés
+* 🎨 NEW: Design moderne avec cards et badges
+* 🎨 NEW: Inputs avec icônes et focus states
+* 🎨 NEW: Boutons gradients avec hover effects
+* 🎨 NEW: Grid responsive 2 colonnes
+* 🔧 IMPROVE: Mémorisation automatique de la clé API
+* 🔧 IMPROVE: Interface plus intuitive et claire
+* 🔧 IMPROVE: Guide d'installation étape par étape
+* 📘 IMPROVE: Messages d'aide contextuels
+* ⚡ IMPROVE: Navigation simplifiée
+* 💾 NEW: Sauvegarde instantanée de la clé API
 
 = 2.0.0 - 2025-01-18 =
 **Major Update - UI/UX Revolution**

@@ -43,6 +43,7 @@ class PluginAdmin
         \add_action('after_plugin_row_independent-niche/independent-niche.php', array($this, 'after_row_notice'));
 
         new RebuildMetabox;
+        DashboardController::getInstance();
         new WizardController;
         new StatController;
     }
