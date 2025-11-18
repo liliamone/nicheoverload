@@ -8,6 +8,8 @@ use TooMuchNiche\application\components\Wizard;
 use TooMuchNiche\application\components\Task;
 use TooMuchNiche\application\models\LogModel;
 use TooMuchNiche\application\TaskScheduler;
+use TooMuchNiche\application\admin\LogTable;
+use TooMuchNiche\application\admin\TaskConfig;
 
 use function TooMuchNiche\prn;
 use function TooMuchNiche\prnx;

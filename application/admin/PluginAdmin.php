@@ -6,6 +6,8 @@ defined('\ABSPATH') || exit;
 
 use TooMuchNiche\application\Plugin;
 use TooMuchNiche\application\admin\RebuildMetabox;
+use TooMuchNiche\application\admin\WizardController;
+use TooMuchNiche\application\admin\StatController;
 use TooMuchNiche\application\components\Task;
 
 use function TooMuchNiche\prn;
