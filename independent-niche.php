@@ -8,7 +8,7 @@ defined('\ABSPATH') || exit;
 Plugin Name: Independent Niche Generator
 Plugin URI: https://github.com/independent-niche-generator
 Description: Générateur de contenu de niche indépendant avec intégration Content Egg Pro et DeepSeek API. Dashboard professionnel avec configuration API simplifiée.
-Version: 2.1.0
+Version: 2.1.1
 Author: Independent Developer
 Text Domain: independent-niche
 Domain Path: /languages

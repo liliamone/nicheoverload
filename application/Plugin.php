@@ -15,8 +15,8 @@ use IndependentNiche\application\components\ArticlePoster;
  */
 class Plugin
 {
-    const version = '2.1.0';
-    const db_version = 24;
+    const version = '2.1.1';
+    const db_version = 25;
     const wp_requires = '6.4';
     const product_id = 900;
     const slug = 'independent-niche';

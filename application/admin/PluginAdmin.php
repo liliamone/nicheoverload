@@ -53,9 +53,8 @@ class PluginAdmin
         if ($GLOBALS['pagenow'] != 'admin.php' || empty($_GET['page']))
             return;
 
-        $page_pats = explode('-', $_GET['page']);
-
-        if (count($page_pats) < 3 || $page_pats[0] . '-' . $page_pats[1] . '-' . $page_pats[2] != Plugin::slug())
+        // Check if page belongs to our plugin
+        if (strpos($_GET['page'], Plugin::slug()) !== 0)
             return;
 
         \wp_enqueue_style('ind-bootstrap', \IndependentNiche\PLUGIN_RES . '/bootstrap/css/bootstrap.css');
@@ -69,7 +68,15 @@ class PluginAdmin
 
     public function add_admin_menu()
     {
-        \add_menu_page(Plugin::getName(), Plugin::getName(), 'publish_posts', Plugin::getSlug(), null, 'dashicons-grid-view');
+        // Menu principal - le premier submenu devient automatiquement la page par défaut
+        \add_menu_page(
+            Plugin::getName(),
+            Plugin::getName(),
+            'publish_posts',
+            Plugin::getSlug(),
+            null,
+            'dashicons-grid-view'
+        );
     }
 
     public static function render($view_name, $_data = null)

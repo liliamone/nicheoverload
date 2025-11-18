@@ -30,7 +30,7 @@ abstract class WizardBootConfig extends BootConfig
 
     public function page_slug()
     {
-        return Plugin::slug . '';
+        return Plugin::slug . '-wizard';
     }
 
     public function add_admin_menu()
