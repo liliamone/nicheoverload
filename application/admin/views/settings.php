@@ -5,23 +5,24 @@ use IndependentNiche\application\components\Wizard;
 
 defined('\ABSPATH') || exit; ?>
 
-<div class="ind ind-animate-in">
+<div class="wrap ind ind-animate-in">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-10">
 
-    <div class="cegg5-container">
+                <div class="ind-card" style="margin-top: 20px;">
+                    <div class="ind-card-header-modern">
+                        <div>
+                            <h1 class="ind-card-title-large">
+                                <?php echo \esc_html(\IndependentNiche\application\Plugin::getName()); ?>
+                            </h1>
+                            <?php if (!empty($title)) : ?>
+                                <p class="text-muted" style="margin: 8px 0 0 0; font-size: 16px;"><?php echo esc_html($title); ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
 
-        <div class="col-12 p-2 p-md-4">
-
-            <div class="ind-card">
-                <div class="ind-card-header">
-                    <h1 class="ind-card-title" style="margin: 0;">
-                        <?php echo \esc_html(\IndependentNiche\application\Plugin::getName()); ?>
-                        <?php if (!empty($title)) : ?>
-                            <small class="ind-text-muted" style="font-size: 16px; font-weight: 400;"><?php echo esc_html($title); ?></small>
-                        <?php endif; ?>
-                    </h1>
-                </div>
-
-                <form id="wizard_form" action="options.php" method="POST">
+                <form id="wizard_form" action="options.php" method="POST" class="ind-wizard-form">
 
                     <div class="col-md-9 col-lg-7 mb-5 text-center">
                         <?php Wizard::getInstance()->printCircles(); ?>
@@ -44,26 +45,33 @@ defined('\ABSPATH') || exit; ?>
 
                     <div class="col-12 mt-4 ind-divider"></div>
 
-                    <div class="col-12 mt-4">
+                    <div class="col-12 mt-5" style="display: flex; gap: 12px; justify-content: flex-start; align-items: center; border-top: 2px solid #f3f4f6; padding-top: 24px;">
                         <?php if (Wizard::getInstance()->getCurrentStep() > 1) : ?>
                             <?php $previous_url = wp_nonce_url(\get_admin_url(\get_current_blog_id(), 'admin.php?page=independent-niche-wizard&action=ind-previous'), 'wizard_nonce'); ?>
-                            <a id="ind_previous" class="btn btn-secondary" href="<?php echo esc_attr($previous_url); ?>" role="button">&#8592; <?php echo esc_attr(__('Previous', 'independent-niche')); ?></a>
+                            <a id="ind_previous" class="ind-btn ind-btn-secondary" href="<?php echo esc_attr($previous_url); ?>" role="button">
+                                &#8592; <?php echo esc_attr(__('Previous', 'independent-niche')); ?>
+                            </a>
                         <?php endif; ?>
 
                     <?php
                     if ($warning)
                         $btn_text = \esc_attr(__('Try again', 'independent-niche')) .  "";
                     elseif (Wizard::getInstance()->isLastStep())
-                        $btn_text = \esc_attr(__('Submit', 'independent-niche'));
+                        $btn_text = \esc_attr(__('🚀 Submit & Start', 'independent-niche'));
                     else
                         $btn_text = \esc_attr(__('Next', 'independent-niche')) .  " &#8594";
 
                     ?>
 
-                    <button id="ind_submit" class="btn btn-primary" type="button"><?php echo $btn_text; ?></button>
+                    <button id="ind_submit" class="ind-btn ind-btn-primary ind-btn-large" type="button">
+                        <?php echo $btn_text; ?>
+                    </button>
                     <input id="ind_real_submit" type="submit" style="display:none;">
                 </div>
             </form>
+
+            </div>
+        </div>
         </div>
     </div>
 </div>

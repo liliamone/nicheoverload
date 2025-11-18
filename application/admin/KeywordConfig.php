@@ -671,7 +671,7 @@ class KeywordConfig extends WizardBootConfig
                         if (switchInput && switchLabel) {
                             const newSwitchId = `useAsTitleSwitch-${sectionId}-${articleNumber}`;
                             switchInput.id = newSwitchId;
-                            switchInput.name = `too-much-niche_keywords[kdata][${sectionId}][${articleNumber}][as_title]`;
+                            switchInput.name = `independent-niche_keywords[kdata][${sectionId}][${articleNumber}][as_title]`;
                             switchLabel.setAttribute('for', newSwitchId);
                         }
 
@@ -689,10 +689,10 @@ class KeywordConfig extends WizardBootConfig
                         const keywordInput = group.querySelector('.keyword-input');
                         const productTextarea = group.querySelector('.product-urls');
                         if (keywordInput) {
-                            keywordInput.name = `too-much-niche_keywords[kdata][${sectionId}][${articleNumber}][keyword]`;
+                            keywordInput.name = `independent-niche_keywords[kdata][${sectionId}][${articleNumber}][keyword]`;
                         }
                         if (productTextarea && addProductsLink) {
-                            productTextarea.name = `too-much-niche_keywords[kdata][${sectionId}][${articleNumber}][products]`;
+                            productTextarea.name = `independent-niche_keywords[kdata][${sectionId}][${articleNumber}][products]`;
                             productTextarea.addEventListener('input', function() {
                                 updateProductsAddedFlag(addProductsLink, productTextarea);
                             });
@@ -701,7 +701,7 @@ class KeywordConfig extends WizardBootConfig
                         // Post ID
                         const postIdInput = group.querySelector('.post-id-input');
                         if (postIdInput) {
-                            postIdInput.name = `too-much-niche_keywords[kdata][${sectionId}][${articleNumber}][post_id]`;
+                            postIdInput.name = `independent-niche_keywords[kdata][${sectionId}][${articleNumber}][post_id]`;
                         }
 
                         // Initialize CodeMirror if the product textarea exists

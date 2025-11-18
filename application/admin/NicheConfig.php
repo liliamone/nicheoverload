@@ -92,10 +92,6 @@ class NicheConfig extends WizardBootConfig
                 'required' => true,
                 'maxlength' => 600,
                 'validator' => array(
-                    array(
-                        'call' => array($this, 'initNiche'),
-                        'message' => __('Unexpected error. Please try again or contact support.', 'independent-niche'),
-                    ),
                     'trim',
                     array(
                         'call' => array('\IndependentNiche\application\helpers\FormValidator', 'required'),
@@ -115,6 +111,10 @@ class NicheConfig extends WizardBootConfig
                         'call' => array($this, 'regexMatch'),
                         'arg' => '~^[^\pL]~ui',
                         'message' => sprintf(__('The field "%s" must begin with a letter.', 'independent-niche'), __('Niche', 'independent-niche')),
+                    ),
+                    array(
+                        'call' => array($this, 'initNiche'),
+                        'message' => __('Could not initialize niche data with DeepSeek. Please check your API key in the Dashboard.', 'independent-niche'),
                     ),
                 ),
             ),
@@ -339,10 +339,10 @@ class NicheConfig extends WizardBootConfig
                 const mainModuleSection = document.getElementById('main_module_section');
                 const mainModuleSelect = document.getElementById('label-main_module');
 
-                const ceIntegrationRadios = ceIntegrationSection.querySelectorAll('input[name="too-much-niche_niche[ce_integration]"]');
+                const ceIntegrationRadios = ceIntegrationSection.querySelectorAll('input[name="independent-niche_niche[ce_integration]"]');
 
                 function toggleMainModuleSection() {
-                    const selectedValue = document.querySelector('input[name="too-much-niche_niche[ce_integration]"]:checked').value;
+                    const selectedValue = document.querySelector('input[name="independent-niche_niche[ce_integration]"]:checked').value;
                     if (selectedValue === 'no') {
                         mainModuleSection.style.display = 'none';
                         mainModuleSelect.removeAttribute('required');
@@ -365,10 +365,31 @@ class NicheConfig extends WizardBootConfig
 
     public function initNiche($value)
     {
-        if (NicheInit::getInstance()->initializeNicheFromApi())
-            return true;
-        else
+        // Check if DeepSeek API key is configured first
+        $api_key = \IndependentNiche\application\admin\AiConfig::getInstance()->option('deepseek_api_key');
+
+        if (empty($api_key)) {
+            \add_settings_error('niche', 'niche',
+                sprintf(__('Please configure your DeepSeek API Key in the <a href="%s">Dashboard</a> before continuing.', 'independent-niche'),
+                    \get_admin_url(\get_current_blog_id(), 'admin.php?page=independent-niche')
+                )
+            );
             return false;
+        }
+
+        // Try to initialize niche data from DeepSeek
+        if (NicheInit::getInstance()->initializeNicheFromApi()) {
+            return true;
+        } else {
+            // Log error but don't block - allow user to continue and fix later
+            error_log('Independent Niche: Could not initialize niche data from DeepSeek API');
+            \add_settings_error('niche', 'niche',
+                __('Warning: Could not generate niche data from DeepSeek. You can continue and the system will retry later.', 'independent-niche'),
+                'warning'
+            );
+            // Return true to not block the wizard
+            return true;
+        }
     }
 
     public static function getMainModuleName()

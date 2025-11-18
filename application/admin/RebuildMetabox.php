@@ -146,7 +146,7 @@ class RebuildMetabox
         <?php if ($is_regen_allowed): ?>
             <br>
             <?php
-            $regen_url = get_admin_url(get_current_blog_id(), 'admin.php?page=too-much-niche&action=regenerate&post_id=' . $post->ID);
+            $regen_url = get_admin_url(get_current_blog_id(), 'admin.php?page=independent-niche&action=regenerate&post_id=' . $post->ID);
             $regen_url = wp_nonce_url($regen_url, 'tmn_regenerate_article');
             ?>
             <a href="<?php echo esc_url($regen_url); ?>" id="tmniche_regenerate_article" class="components-button is-secondary is-destructive" style="padding-top: 0px; padding-bottom: 0px;"><?php echo \esc_attr(__('Regenerate Content (Beta)', 'independent-niche')); ?></a>
