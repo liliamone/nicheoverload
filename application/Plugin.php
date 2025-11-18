@@ -1,33 +1,32 @@
 <?php
 
-namespace TooMuchNiche\application;
+namespace IndependentNiche\application;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\components\logger\Logger;
-use TooMuchNiche\application\components\ArticlePoster;
+use IndependentNiche\application\components\logger\Logger;
+use IndependentNiche\application\components\ArticlePoster;
 
 /**
  * Plugin class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class Plugin
 {
-    const version = '4.2.0';
+    const version = '1.0.0';
     const db_version = 22;
-    const wp_requires = '6.2';
-    const product_id = 800;
-    const slug = 'too-much-niche';
-    const short_slug = 'tmniche';
-    const name = 'Too Much Niche';
-    const api_base = 'https://www.keywordrush.com/api/v1';
-    const api_niche = 'https://www.keywordrush.com/niche/api1';
-    const website = 'https://www.keywordrush.com';
-    const supportUri = 'https://www.keywordrush.com/contact';
-    const panelUri = 'https://www.keywordrush.com/panel';
+    const wp_requires = '6.4';
+    const product_id = 900;
+    const slug = 'independent-niche';
+    const short_slug = 'indniche';
+    const name = 'Independent Niche Generator';
+    const api_base = '';
+    const api_niche = '';
+    const website = 'https://github.com/independent-niche-generator';
+    const supportUri = 'https://github.com/independent-niche-generator/issues';
+    const panelUri = 'https://github.com/independent-niche-generator';
 
     private static $instance = null;
 
@@ -61,10 +60,8 @@ class Plugin
 
     public static function isActivated()
     {
-        if (\TooMuchNiche\application\admin\LicConfig::getInstance()->option('license_key'))
-            return true;
-        else
-            return false;
+        // Plus de vérification de licence - toujours actif
+        return true;
     }
 
     public static function getSlug()
@@ -89,7 +86,7 @@ class Plugin
 
     private function loadTextdomain()
     {
-        \load_plugin_textdomain('too-much-niche', false, \TooMuchNiche\PLUGIN_PATH . 'languages');
+        \load_plugin_textdomain('independent-niche', false, \IndependentNiche\PLUGIN_PATH . 'languages');
     }
 
     public static function isDevEnvironment()

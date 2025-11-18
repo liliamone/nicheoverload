@@ -1,22 +1,22 @@
 <?php
 
-namespace TooMuchNiche\application\components;
+namespace IndependentNiche\application\components;
 
-use TooMuchNiche\application\admin\CeConfig;
-use TooMuchNiche\application\components\Wizard;
-use TooMuchNiche\application\admin\PluginAdmin;
-use TooMuchNiche\application\admin\KeywordConfig;
-use TooMuchNiche\application\admin\NicheConfig;
-use TooMuchNiche\application\Plugin;
+use IndependentNiche\application\admin\CeConfig;
+use IndependentNiche\application\components\Wizard;
+use IndependentNiche\application\admin\PluginAdmin;
+use IndependentNiche\application\admin\KeywordConfig;
+use IndependentNiche\application\admin\NicheConfig;
+use IndependentNiche\application\Plugin;
 
 defined('\ABSPATH') || exit;
 
 /**
  * WizardBootConfig class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 abstract class WizardBootConfig extends BootConfig
 {
@@ -35,7 +35,7 @@ abstract class WizardBootConfig extends BootConfig
 
     public function add_admin_menu()
     {
-        \add_submenu_page(Plugin::slug, __('Create Task', 'too-much-niche') . ' &lsaquo; ' . Plugin::getName(), __('Create Task', 'too-much-niche'), 'publish_posts', $this->page_slug(), array($this, 'settings_page'));
+        \add_submenu_page(Plugin::slug, __('Create Task', 'independent-niche') . ' &lsaquo; ' . Plugin::getName(), __('Create Task', 'independent-niche'), 'publish_posts', $this->page_slug(), array($this, 'settings_page'));
     }
 
     public function setNextStep($value, $option, $old_value)

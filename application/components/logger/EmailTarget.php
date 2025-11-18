@@ -1,18 +1,18 @@
 <?php
 
-namespace TooMuchNiche\application\components\logger;
+namespace IndependentNiche\application\components\logger;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\helpers\EmailHelper;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\helpers\EmailHelper;
 
 /**
  * EmailTarget class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class EmailTarget extends Target
 {

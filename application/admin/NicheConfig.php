@@ -1,28 +1,28 @@
 <?php
 
-namespace TooMuchNiche\application\admin;
+namespace IndependentNiche\application\admin;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\admin\PluginAdmin;
-use TooMuchNiche\application\components\NicheInit;
-use TooMuchNiche\application\components\WizardBootConfig;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\admin\PluginAdmin;
+use IndependentNiche\application\components\NicheInit;
+use IndependentNiche\application\components\WizardBootConfig;
 
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prnx;
 
 /**
  * NicheConfig class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class NicheConfig extends WizardBootConfig
 {
     public function getTitle()
     {
-        return __('Niche settings', 'too-much-niche');
+        return __('Niche settings', 'independent-niche');
     }
 
     public function option_name()
@@ -80,10 +80,10 @@ class NicheConfig extends WizardBootConfig
         $options = array(
             'notice' => array(
                 'callback' => array($this, 'render_text'),
-                'description' => '<div class="alert alert-light col-7" role="alert">' . sprintf(__('Please refer to the <a target="_blank" href="%s">Quick start guide</a>.', 'too-much-niche'), 'https://tmniche-docs.keywordrush.com/getting-started/quick-start') . '</div>'
+                'description' => '<div class="alert alert-light col-7" role="alert">' . sprintf(__('Please refer to the <a target="_blank" href="%s">Quick start guide</a>.', 'independent-niche'), 'https://tmniche-docs.keywordrush.com/getting-started/quick-start') . '</div>'
             ),
             'niche' => array(
-                'title' => __('Niche', 'too-much-niche'),
+                'title' => __('Niche', 'independent-niche'),
                 'description' => __('Describe your site\'s focus (e.g., <em>Outdoor and Adventure - Camping, hiking, and survival gear</em>)'),
                 'help_url' => 'https://tmniche-docs.keywordrush.com/getting-started/niche-selection',
                 'callback' => array($this, 'render_textarea'),
@@ -94,42 +94,42 @@ class NicheConfig extends WizardBootConfig
                 'validator' => array(
                     array(
                         'call' => array($this, 'initNiche'),
-                        'message' => __('Unexpected error. Please try again or contact support.', 'too-much-niche'),
+                        'message' => __('Unexpected error. Please try again or contact support.', 'independent-niche'),
                     ),
                     'trim',
                     array(
-                        'call' => array('\TooMuchNiche\application\helpers\FormValidator', 'required'),
-                        'message' => sprintf(__('The field "%s" can not be empty.', 'too-much-niche'), __('Niche', 'too-much-niche')),
+                        'call' => array('\IndependentNiche\application\helpers\FormValidator', 'required'),
+                        'message' => sprintf(__('The field "%s" can not be empty.', 'independent-niche'), __('Niche', 'independent-niche')),
                     ),
                     array(
-                        'call' => array('\TooMuchNiche\application\helpers\FormValidator', 'min_length'),
+                        'call' => array('\IndependentNiche\application\helpers\FormValidator', 'min_length'),
                         'arg' => 3,
-                        'message' => sprintf(__('The field "%s" should contain at least %d characters.', 'too-much-niche'), __('Niche', 'too-much-niche'), 3),
+                        'message' => sprintf(__('The field "%s" should contain at least %d characters.', 'independent-niche'), __('Niche', 'independent-niche'), 3),
                     ),
                     array(
-                        'call' => array('\TooMuchNiche\application\helpers\FormValidator', 'max_length'),
+                        'call' => array('\IndependentNiche\application\helpers\FormValidator', 'max_length'),
                         'arg' => 600,
-                        'message' => sprintf(__('The field "%s" should contain at most %d characters.', 'too-much-niche'), __('Niche', 'too-much-niche'), 600),
+                        'message' => sprintf(__('The field "%s" should contain at most %d characters.', 'independent-niche'), __('Niche', 'independent-niche'), 600),
                     ),
                     array(
                         'call' => array($this, 'regexMatch'),
                         'arg' => '~^[^\pL]~ui',
-                        'message' => sprintf(__('The field "%s" must begin with a letter.', 'too-much-niche'), __('Niche', 'too-much-niche')),
+                        'message' => sprintf(__('The field "%s" must begin with a letter.', 'independent-niche'), __('Niche', 'independent-niche')),
                     ),
                 ),
             ),
             'language' => array(
-                'title' => __('Language', 'too-much-niche'),
+                'title' => __('Language', 'independent-niche'),
                 'callback' => array($this, 'render_dropdown'),
                 'dropdown_options' => self::getLanguagesList(),
                 'default' => self::getDefaultLang(),
             ),
             'ce_integration' => array(
-                'title' => __('Integrate affiliate products into articles?', 'too-much-niche'),
+                'title' => __('Integrate affiliate products into articles?', 'independent-niche'),
                 'callback' => array($this, 'render_radio'),
                 'dropdown_options' => array(
-                    'no' => __('<b>Info Articles Only:</b> Create content without affiliate products', 'too-much-niche'),
-                    'yes' => __('<b>Product Articles:</b> Include affiliate products (requires Content Egg Pro)', 'too-much-niche'),
+                    'no' => __('<b>Info Articles Only:</b> Create content without affiliate products', 'independent-niche'),
+                    'yes' => __('<b>Product Articles:</b> Include affiliate products (requires Content Egg Pro)', 'independent-niche'),
                 ),
                 'default' => 'yes',
                 'validator' => array(
@@ -140,21 +140,21 @@ class NicheConfig extends WizardBootConfig
                 ),
             ),
             'main_module' => array(
-                'title' => __('Main affiliate module', 'too-much-niche') . ' ' . __('(required)', 'too-much-niche'),
+                'title' => __('Main affiliate module', 'independent-niche') . ' ' . __('(required)', 'independent-niche'),
                 'callback' => array($this, 'render_dropdown'),
-                'dropdown_options' => self::addBlankDropdownItem(self::getMainModules(), '- ' . __('Please select a module', 'too-much-niche') . ' -'),
+                'dropdown_options' => self::addBlankDropdownItem(self::getMainModules(), '- ' . __('Please select a module', 'independent-niche') . ' -'),
                 'default' => '',
                 'required' => true,
                 'validator' => array(
                     array(
-                        'call' => array('\TooMuchNiche\application\helpers\FormValidator', 'required'),
+                        'call' => array('\IndependentNiche\application\helpers\FormValidator', 'required'),
                         'when'    => array('ce_integration', 'yes'),
-                        'message' => sprintf(__('The field "%s" can not be empty.', 'too-much-niche'), 'Main affiliate module'),
+                        'message' => sprintf(__('The field "%s" can not be empty.', 'independent-niche'), 'Main affiliate module'),
                     ),
                     array(
                         'call' => array($this, 'checkMainModuleApi'),
                         'when'    => array('ce_integration', 'yes'),
-                        'message' => __('Make sure the module is configured correctly and returns search results.', 'too-much-niche'),
+                        'message' => __('Make sure the module is configured correctly and returns search results.', 'independent-niche'),
                     ),
                 ),
             ),
@@ -263,8 +263,8 @@ class NicheConfig extends WizardBootConfig
 
     public static function getCeInstalledError()
     {
-        return sprintf(__('To add affiliate products to your site, <em>%s</em> requires <strong>%s %s+</strong> to be installed and active.', 'too-much-niche'), Plugin::getName(), 'Content Egg Pro', PluginAdmin::MIN_CE_VERSION) .
-            ' ' . sprintf(__("If you don't have one yet, you can purchase it from our <a target='_blank' href='%s'>official website</a>.", 'too-much-niche'), Plugin::getWebsite() . '/contentegg/pricing?utm_source=toomuchniche&utm_medium=referral&utm_campaign=wpadmin');
+        return sprintf(__('To add affiliate products to your site, <em>%s</em> requires <strong>%s %s+</strong> to be installed and active.', 'independent-niche'), Plugin::getName(), 'Content Egg Pro', PluginAdmin::MIN_CE_VERSION) .
+            ' ' . sprintf(__("If you don't have one yet, you can purchase it from our <a target='_blank' href='%s'>official website</a>.", 'independent-niche'), Plugin::getWebsite() . '/contentegg/pricing?utm_source=toomuchniche&utm_medium=referral&utm_campaign=wpadmin');
     }
 
     public static function isCeIntegration()
@@ -280,9 +280,9 @@ class NicheConfig extends WizardBootConfig
         {
             $settings_uri = \get_admin_url(\get_current_blog_id(), 'admin.php?page=content-egg-modules--' . $module_id);
             if (strstr($module_id, 'AE__'))
-                $error = sprintf(__('Activate the %s module.', 'too-much-niche'), self::getModuleName($module_id));
+                $error = sprintf(__('Activate the %s module.', 'independent-niche'), self::getModuleName($module_id));
             else
-                $error = sprintf(__('Activate the <a target="_blank" href="%s">%s module</a>.', 'too-much-niche'), $settings_uri, self::getModuleName($module_id));
+                $error = sprintf(__('Activate the <a target="_blank" href="%s">%s module</a>.', 'independent-niche'), $settings_uri, self::getModuleName($module_id));
 
             \add_settings_error('main_module', 'main_module', $error);
             return false;
@@ -306,10 +306,10 @@ class NicheConfig extends WizardBootConfig
             }
 
             if (!$data)
-                $error = sprintf(__('The %s module did not return products for test request.', 'too-much-niche'), $parser->getName());
+                $error = sprintf(__('The %s module did not return products for test request.', 'independent-niche'), $parser->getName());
 
             if ($api_error)
-                $error .= '<br>' . sprintf(__('API response: "%s"', 'too-much-niche'), $api_error);
+                $error .= '<br>' . sprintf(__('API response: "%s"', 'independent-niche'), $api_error);
         }
 
         if ($error)

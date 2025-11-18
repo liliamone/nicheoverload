@@ -1,30 +1,29 @@
 <?php
 
-namespace TooMuchNiche\application\admin;
+namespace IndependentNiche\application\admin;
 
 defined('\ABSPATH') || exit;
 
-use TooMuchNiche\application\components\NicheApi;
-use TooMuchNiche\application\components\Task;
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\components\WizardBootConfig;
+use IndependentNiche\application\components\Task;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\components\WizardBootConfig;
 
-use function TooMuchNiche\prn;
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prn;
+use function IndependentNiche\prnx;
 
 /**
  * TaskConfig class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @link https://github.com/independent-niche-generator
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class TaskConfig extends WizardBootConfig
 {
 
     public function getTitle()
     {
-        return __('Create Task', 'too-much-niche');
+        return __('Create Task', 'independent-niche');
     }
 
     public function option_name()
@@ -52,12 +51,12 @@ class TaskConfig extends WizardBootConfig
             ),
             'notice' => array(
                 'callback' => array($this, 'render_text'),
-                'description' => '<div class="lead">' . __('You\'re all set! Start the task now.', 'too-much-niche') . '</div>'
+                'description' => '<div class="lead">' . __('You\'re all set! Start the task now.', 'independent-niche') . '</div>'
                     . '<br />',
             ),
             'email_notice' => array(
-                'title' => __('Send notification', 'too-much-niche'),
-                'description' => sprintf(__('Notify admin via email upon task completion.', 'too-much-niche'), \get_option('admin_email')),
+                'title' => __('Send notification', 'independent-niche'),
+                'description' => sprintf(__('Notify admin via email upon task completion.', 'independent-niche'), \get_option('admin_email')),
                 'callback' => array($this, 'render_checkbox'),
                 'default' => false,
                 'section' => 'default',
@@ -120,29 +119,14 @@ class TaskConfig extends WizardBootConfig
             }
         }
 
-        $result = NicheApi::request('/task', $settings, 'POST');
-
-        if ($result && !empty($result['status']) && $result['status'] == 'success')
-        {
+        // Plus d'appel API externe - démarrer la tâche directement
+        try {
             Task::getInstance()->start();
             return true;
-        }
-
-        if ($result && !empty($result['status']) && $result['status'] == 'error')
-        {
-            \add_settings_error('hidden', 'hidden', __("Can't create the task.", 'too-much-niche'));
-
-            $m = $result['message'];
-            if (strstr($m, 'Please enter a new license key'))
-            {
-                $rurl = \get_admin_url(\get_current_blog_id(), 'admin.php?page=too-much-niche-articles&action=restart&_wpnonce=' . \wp_create_nonce('tmn_restart')) . '&restartniche=0';
-                $m .= ' [<a href="' . $rurl . '">' . __('Restart with new key', 'too-much-niche') . '</a>]';
-            }
-            \add_settings_error('hidden', 'hidden', $m);
+        } catch (\Exception $e) {
+            \add_settings_error('hidden', 'hidden', __("Can't create the task.", 'independent-niche') . ' ' . $e->getMessage());
             return false;
         }
-
-        return false;
     }
 
     private static function getCeModuleSettings($module_id)

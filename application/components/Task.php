@@ -1,28 +1,26 @@
 <?php
 
-namespace TooMuchNiche\application\components;
+namespace IndependentNiche\application\components;
 
-use TooMuchNiche\application\admin\KeywordConfig;
-use TooMuchNiche\application\Plugin;
-use TooMuchNiche\application\TaskScheduler;
-use TooMuchNiche\application\admin\LicConfig;
-use TooMuchNiche\application\admin\NicheConfig;
-use TooMuchNiche\application\admin\TaskConfig;
-use TooMuchNiche\application\helpers\EmailHelper;
-use TooMuchNiche\application\components\NicheInit;
-use TooMuchNiche\application\models\ArticleModel;
+use IndependentNiche\application\admin\KeywordConfig;
+use IndependentNiche\application\Plugin;
+use IndependentNiche\application\TaskScheduler;
+use IndependentNiche\application\admin\NicheConfig;
+use IndependentNiche\application\admin\TaskConfig;
+use IndependentNiche\application\helpers\EmailHelper;
+use IndependentNiche\application\components\NicheInit;
+use IndependentNiche\application\models\ArticleModel;
 
-use function TooMuchNiche\prn;
-use function TooMuchNiche\prnx;
+use function IndependentNiche\prn;
+use function IndependentNiche\prnx;
 
 defined('\ABSPATH') || exit;
 
 /**
  * Task class file
  *
- * @author keywordrush.com <support@keywordrush.com>
- * @link https://www.keywordrush.com
- * @copyright Copyright &copy; 2025 keywordrush.com
+ * @author Independent Developer
+ * @copyright Copyright &copy; 2025 Independent Niche Generator
  */
 class Task
 {
@@ -76,27 +74,27 @@ class Task
     {
         $to = \get_bloginfo('admin_email');
         $domain = preg_replace('/^https?:\/\//', '', \get_home_url());
-        $subject = Plugin::getName() . ': ' . __('task completed successfully', 'too-much-niche') . ' - ' . $domain;
+        $subject = Plugin::getName() . ': ' . __('task completed successfully', 'independent-niche') . ' - ' . $domain;
 
         $options = TaskConfig::getInstance()->getTaskOptions();
 
         $message = '';
-        $message .= sprintf(__('Website: %s', 'too-much-niche'), $domain);
-        $message .= "\r\n" . sprintf(__('Niche: %s', 'too-much-niche'), wp_trim_words($options['niche'], 20));
-        $message .= "\r\n" . sprintf(__('Language: %s', 'too-much-niche'), $options['language']);
-        $message .= "\r\n" . __('All articles have been successfully posted.', 'too-much-niche');
+        $message .= sprintf(__('Website: %s', 'independent-niche'), $domain);
+        $message .= "\r\n" . sprintf(__('Niche: %s', 'independent-niche'), wp_trim_words($options['niche'], 20));
+        $message .= "\r\n" . sprintf(__('Language: %s', 'independent-niche'), $options['language']);
+        $message .= "\r\n" . __('All articles have been successfully posted.', 'independent-niche');
 
         $remaining_credits = $this->getCurrentRemainingCredits();
         if ($this->getCurrentRemainingCredits() > 0)
-            $message .= "\r\n\r\n" . sprintf(__('Remaining article credits: %d.', 'too-much-niche'), $remaining_credits);
+            $message .= "\r\n\r\n" . sprintf(__('Remaining article credits: %d.', 'independent-niche'), $remaining_credits);
         else
-            $message .= "\r\n\r\n" . __('Please note that all article generation credits have been used. To purchase a new key, visit:', 'too-much-niche') . ' https://www.keywordrush.com/toomuchniche/pricing';
+            $message .= "\r\n\r\n" . __('Please note that all article generation credits have been used. To purchase a new key, visit:', 'independent-niche') . ' https://www.keywordrush.com/toomuchniche/pricing';
 
         if ($coupon_and_date = Task::getInstance()->getCouponCodeAndDate())
         {
             list($coupon, $coupon_date_formated) = $coupon_and_date;
-            $message .= "\r\n" . sprintf(__('Use the coupon code %s for a 30%% discount.', 'too-much-niche'), $coupon);
-            $message .= " " . sprintf(__('Valid for 3 days until %s.', 'too-much-niche'), $coupon_date_formated);
+            $message .= "\r\n" . sprintf(__('Use the coupon code %s for a 30%% discount.', 'independent-niche'), $coupon);
+            $message .= " " . sprintf(__('Valid for 3 days until %s.', 'independent-niche'), $coupon_date_formated);
         }
 
         EmailHelper::mail($to, $subject, $message);
@@ -158,7 +156,7 @@ class Task
 
     public function proccessArticles($limit = null)
     {
-        $ac = new ArticleClient;
+        $ac = new LocalArticleClient;
         $poster = new ArticlePoster;
         $c_poster = new CommentPoster;
 
@@ -235,9 +233,9 @@ class Task
         $remaining_credits = NicheInit::getInstance()->getRemainingCredits();
         $step = ($remaining_credits > 0) ? 2 : 1;
 
+        // Plus de licence à supprimer
         if ($del_lic)
         {
-            \delete_option(LicConfig::getInstance()->option_name());
             $step = 1;
         }
 
@@ -251,14 +249,8 @@ class Task
 
     public function getCouponCodeAndDate()
     {
-        if ($this->getCurrentRemainingCredits() > 0)
-            return false;
-
-        $parts = explode('-', LicConfig::getInstance()->option('license_key'));
-        if (!isset($parts[3]))
-            return false;
-
-        $coupon_part = $parts[3];
+        // Plus de système de coupon avec licence
+        return false;
 
         $coupon_date_formated = '';
         $last = ArticleModel::model()->getLastCreateDate();
