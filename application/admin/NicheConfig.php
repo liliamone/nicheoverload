@@ -377,6 +377,13 @@ class NicheConfig extends WizardBootConfig
             return false;
         }
 
+        // Check if niche data is already initialized (skip DeepSeek call if already done)
+        $existing_niche = NicheInit::getInstance()->getNiche();
+        if (!empty($existing_niche) && !empty($existing_niche['keywords']) && !empty($existing_niche['recipes'])) {
+            // Niche already initialized, no need to call DeepSeek again
+            return true;
+        }
+
         // Try to initialize niche data from DeepSeek
         if (NicheInit::getInstance()->initializeNicheFromApi()) {
             return true;

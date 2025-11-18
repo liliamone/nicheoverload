@@ -15,7 +15,7 @@ use IndependentNiche\application\components\ArticlePoster;
  */
 class Plugin
 {
-    const version = '2.2.1';
+    const version = '2.2.2';
     const db_version = 27;
     const wp_requires = '6.4';
     const product_id = 900;

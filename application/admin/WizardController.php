@@ -161,37 +161,43 @@ class WizardController
 
     public function actionStep1()
     {
-        // Plus de configuration de licence nécessaire
+        // Step 1: Niche configuration
         NicheConfig::getInstance()->adminInit();
     }
 
     public function actionStep2()
     {
-        NicheConfig::getInstance()->adminInit();
+        // Step 2: Keywords configuration
+        KeywordConfig::getInstance()->adminInit();
     }
 
     public function actionStep3()
     {
-        KeywordConfig::getInstance()->adminInit();
+        // Step 3: AI Settings (DeepSeek API, tone, etc.)
+        AiConfig::getInstance()->adminInit();
     }
 
     public function actionStep4()
     {
-        AiConfig::getInstance()->adminInit();
+        // Step 4: Content Egg configuration
+        CeConfig::getInstance()->adminInit();
     }
 
     public function actionStep5()
     {
-        CeConfig::getInstance()->adminInit();
+        // Step 5: Site configuration
+        SiteConfig::getInstance()->adminInit();
     }
 
     public function actionStep6()
     {
-        SiteConfig::getInstance()->adminInit();
+        // Step 6: Task configuration
+        TaskConfig::getInstance()->adminInit();
     }
 
     public function actionStep7()
     {
+        // Step 7: Final review (same as step 6 for now)
         TaskConfig::getInstance()->adminInit();
     }
 
