@@ -395,20 +395,23 @@ class NicheConfig extends WizardBootConfig
         $existing_niche = NicheInit::getInstance()->getNiche();
         if (!empty($existing_niche) && !empty($existing_niche['keywords']) && !empty($existing_niche['recipes'])) {
             // Niche already initialized, no need to call DeepSeek again
+            // Silent success - no warning needed
             return true;
         }
 
         // Try to initialize niche data from DeepSeek
-        if (NicheInit::getInstance()->initializeNicheFromApi()) {
+        $result = NicheInit::getInstance()->initializeNicheFromApi();
+
+        if ($result === true) {
+            // DeepSeek succeeded - silent success, no message needed
             return true;
         } else {
-            // Log error but don't block - allow user to continue and fix later
-            error_log('Independent Niche: Could not initialize niche data from DeepSeek API');
-            \add_settings_error('niche', 'niche',
-                __('Warning: Could not generate niche data from DeepSeek. You can continue and the system will retry later.', 'independent-niche'),
-                'warning'
-            );
-            // Return true to not block the wizard
+            // DeepSeek failed - This is acceptable for info-only articles
+            // We don't show a warning because the user can continue without DeepSeek data
+            // The wizard will simply create info articles without advanced niche insights
+            error_log('Independent Niche: Could not initialize niche data from DeepSeek API - User can continue with basic article generation');
+
+            // Return true to allow progression - no warning shown
             return true;
         }
     }

@@ -44,12 +44,22 @@ class NicheInit
 
             $result = $deepseek->generateNicheData($niche_text, $language);
 
-            if ($result && !is_wp_error($result)) {
+            if (is_wp_error($result)) {
+                error_log('Independent Niche: DeepSeek API Error - ' . $result->get_error_message());
+                return false;
+            }
+
+            if ($result && is_array($result)) {
                 $niche_data = $this->parseDeepSeekResponse($result);
                 if ($niche_data) {
                     $this->setNiche($niche_data);
+                    error_log('Independent Niche: Successfully initialized niche data from DeepSeek');
                     return true;
+                } else {
+                    error_log('Independent Niche: Failed to parse DeepSeek response - Invalid JSON format');
                 }
+            } else {
+                error_log('Independent Niche: DeepSeek returned empty or invalid response');
             }
 
             return false;
@@ -65,6 +75,13 @@ class NicheInit
         if (isset($response['choices'][0]['message']['content'])) {
             $content = $response['choices'][0]['message']['content'];
 
+            // Clean the content - remove markdown code blocks if present
+            $content = trim($content);
+            $content = preg_replace('/^```json\s*/i', '', $content);
+            $content = preg_replace('/^```\s*/i', '', $content);
+            $content = preg_replace('/\s*```$/i', '', $content);
+            $content = trim($content);
+
             // Try to extract JSON from the response
             $json_data = json_decode($content, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($json_data)) {
@@ -75,6 +92,8 @@ class NicheInit
                     'trending_topics' => isset($json_data['trending_topics']) ? $json_data['trending_topics'] : array(),
                     'remaining_credits' => 100, // Set default value for independent usage
                 );
+            } else {
+                error_log('Independent Niche: JSON Parse Error - ' . json_last_error_msg() . ' | Content: ' . substr($content, 0, 200));
             }
         }
         return false;
@@ -123,8 +142,11 @@ class NicheInit
 
     public function getRemainingCredits()
     {
-        if (empty($this->niche['remaining_credits']))
-            return 0;
+        if (empty($this->niche['remaining_credits'])) {
+            // Return default credits when DeepSeek data is not available
+            // This allows the wizard to function without DeepSeek integration
+            return 30; // Default: 30 articles
+        }
 
         return (int) $this->niche['remaining_credits'];
     }
@@ -197,6 +219,11 @@ class NicheInit
 
     public function getInitRecipes($is_ce_enabled)
     {
+        // If no recipes exist, create default ones
+        if (empty($this->niche['recipes'])) {
+            return $this->getDefaultRecipes($is_ce_enabled);
+        }
+
         $res = array();
         foreach ($this->niche['recipes'] as $r)
         {
@@ -207,6 +234,24 @@ class NicheInit
         }
 
         return $res;
+    }
+
+    private function getDefaultRecipes($is_ce_enabled)
+    {
+        // Default recipes when DeepSeek data is not available
+        if ($is_ce_enabled) {
+            return array(
+                1 => __('Product Roundup', 'independent-niche'),
+                2 => __('Product Overview', 'independent-niche'),
+                3 => __('Informative Article', 'independent-niche'),
+            );
+        } else {
+            return array(
+                1 => __('Informative Article', 'independent-niche'),
+                2 => __('How-To Guide', 'independent-niche'),
+                3 => __('Tips & Tricks', 'independent-niche'),
+            );
+        }
     }
 
     public function isCeRequired()
