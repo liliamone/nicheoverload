@@ -74,15 +74,23 @@ class DeepSeekClient
 
     private function makeRequest($endpoint, $data)
     {
+        $logger = \IndependentNiche\application\helpers\Logger::getInstance();
+
         if (empty($endpoint) || !is_array($data)) {
+            $logger->error('Invalid request parameters', array('endpoint' => $endpoint));
             return new \WP_Error('invalid_params', __('Invalid request parameters.', 'independent-niche'));
         }
+
+        $logger->api($endpoint, 'SENDING', 'Sending request to DeepSeek API', array(
+            'model' => isset($data['model']) ? $data['model'] : 'unknown',
+            'max_tokens' => isset($data['max_tokens']) ? $data['max_tokens'] : 'default'
+        ));
 
         $args = [
             'method' => 'POST',
             'timeout' => $this->timeout,
             'headers' => [
-                'Authorization' => 'Bearer ' . $this->api_key,
+                'Authorization' => 'Bearer ' . substr($this->api_key, 0, 10) . '...', // Mask API key in logs
                 'Content-Type' => 'application/json',
                 'User-Agent' => 'Independent-Niche-Generator/1.0'
             ],
@@ -90,16 +98,27 @@ class DeepSeekClient
             'sslverify' => true
         ];
 
+        $start_time = microtime(true);
         $response = wp_remote_post($this->base_url . $endpoint, $args);
+        $duration = round((microtime(true) - $start_time) * 1000, 2);
 
         if (is_wp_error($response)) {
-            error_log('DeepSeek API Error: ' . $response->get_error_message());
+            $logger->api($endpoint, 'FAILED', 'API request failed', array(
+                'error_code' => $response->get_error_code(),
+                'error_message' => $response->get_error_message(),
+                'duration_ms' => $duration
+            ));
             return $response;
         }
 
         $status_code = wp_remote_retrieve_response_code($response);
         if ($status_code !== 200) {
-            error_log('DeepSeek API HTTP Error: ' . $status_code);
+            $body = wp_remote_retrieve_body($response);
+            $logger->api($endpoint, 'HTTP_ERROR', "HTTP {$status_code}", array(
+                'status_code' => $status_code,
+                'response_body' => substr($body, 0, 500),
+                'duration_ms' => $duration
+            ));
             return new \WP_Error('api_error', sprintf(__('API request failed with status: %d', 'independent-niche'), $status_code));
         }
 
@@ -107,9 +126,18 @@ class DeepSeekClient
         $decoded = json_decode($body, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            error_log('DeepSeek API JSON Error: ' . json_last_error_msg());
+            $logger->api($endpoint, 'JSON_ERROR', 'Failed to parse JSON response', array(
+                'json_error' => json_last_error_msg(),
+                'response_preview' => substr($body, 0, 200),
+                'duration_ms' => $duration
+            ));
             return new \WP_Error('json_error', __('Invalid API response format.', 'independent-niche'));
         }
+
+        $logger->api($endpoint, 'SUCCESS', 'API request successful', array(
+            'duration_ms' => $duration,
+            'response_size' => strlen($body)
+        ));
 
         return $decoded;
     }

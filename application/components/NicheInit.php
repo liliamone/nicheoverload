@@ -35,6 +35,8 @@ class NicheInit
 
     public function initializeNicheFromApi()
     {
+        $logger = \IndependentNiche\application\helpers\Logger::getInstance();
+
         try {
             $deepseek = new DeepSeekClient();
             $niche_config = \IndependentNiche\application\admin\NicheConfig::getInstance();
@@ -42,10 +44,18 @@ class NicheInit
             $niche_text = $niche_config->option('niche');
             $language = $niche_config->option('language', 'English');
 
+            $logger->info('Attempting to initialize niche from DeepSeek', array(
+                'niche' => $niche_text,
+                'language' => $language
+            ));
+
             $result = $deepseek->generateNicheData($niche_text, $language);
 
             if (is_wp_error($result)) {
-                error_log('Independent Niche: DeepSeek API Error - ' . $result->get_error_message());
+                $logger->error('DeepSeek API Error', array(
+                    'error_code' => $result->get_error_code(),
+                    'error_message' => $result->get_error_message()
+                ));
                 return false;
             }
 
@@ -53,27 +63,43 @@ class NicheInit
                 $niche_data = $this->parseDeepSeekResponse($result);
                 if ($niche_data) {
                     $this->setNiche($niche_data);
-                    error_log('Independent Niche: Successfully initialized niche data from DeepSeek');
+                    $logger->success('Successfully initialized niche data from DeepSeek', array(
+                        'recipes_count' => count($niche_data['recipes']),
+                        'keywords_count' => count($niche_data['keywords']),
+                        'remaining_credits' => $niche_data['remaining_credits']
+                    ));
                     return true;
                 } else {
-                    error_log('Independent Niche: Failed to parse DeepSeek response - Invalid JSON format');
+                    $logger->error('Failed to parse DeepSeek response - Invalid JSON format');
                 }
             } else {
-                error_log('Independent Niche: DeepSeek returned empty or invalid response');
+                $logger->error('DeepSeek returned empty or invalid response', array(
+                    'result_type' => gettype($result)
+                ));
             }
 
             return false;
 
         } catch (\Exception $e) {
-            error_log('Independent Niche Generator Error: ' . $e->getMessage());
+            $logger->error('Exception in initializeNicheFromApi', array(
+                'exception' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ));
             return false;
         }
     }
 
     private function parseDeepSeekResponse($response)
     {
+        $logger = \IndependentNiche\application\helpers\Logger::getInstance();
+
         if (isset($response['choices'][0]['message']['content'])) {
             $content = $response['choices'][0]['message']['content'];
+
+            $logger->debug('Parsing DeepSeek response', array(
+                'content_length' => strlen($content),
+                'content_preview' => substr($content, 0, 200)
+            ));
 
             // Clean the content - remove markdown code blocks if present
             $content = trim($content);
@@ -85,6 +111,12 @@ class NicheInit
             // Try to extract JSON from the response
             $json_data = json_decode($content, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($json_data)) {
+                $logger->debug('JSON parsed successfully', array(
+                    'has_keywords' => isset($json_data['keywords']),
+                    'has_recipes' => isset($json_data['recipes']),
+                    'has_trending_topics' => isset($json_data['trending_topics'])
+                ));
+
                 // Transform DeepSeek response to expected niche format
                 return array(
                     'keywords' => isset($json_data['keywords']) ? $json_data['keywords'] : array(),
@@ -93,8 +125,15 @@ class NicheInit
                     'remaining_credits' => 100, // Set default value for independent usage
                 );
             } else {
-                error_log('Independent Niche: JSON Parse Error - ' . json_last_error_msg() . ' | Content: ' . substr($content, 0, 200));
+                $logger->error('JSON Parse Error', array(
+                    'error' => json_last_error_msg(),
+                    'content_preview' => substr($content, 0, 500)
+                ));
             }
+        } else {
+            $logger->error('DeepSeek response missing expected structure', array(
+                'response_keys' => array_keys($response)
+            ));
         }
         return false;
     }
