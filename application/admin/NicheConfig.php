@@ -163,18 +163,8 @@ class NicheConfig extends WizardBootConfig
             ),
         );
 
-        if (!NicheInit::getInstance()->isCeRequired())
-        {
-            $options['ce_integration'] = array(
-                'callback' => array($this, 'render_hidden'),
-                'default' => 'no',
-            );
-            // Also hide main_module when ce_integration is 'no'
-            $options['main_module'] = array(
-                'callback' => array($this, 'render_hidden'),
-                'default' => '',
-            );
-        }
+        // Do NOT hide CE fields based on isCeRequired() - this is evaluated BEFORE user submits
+        // The JavaScript will handle hiding/showing main_module based on ce_integration value
 
         return $options;
     }
@@ -393,7 +383,7 @@ class NicheConfig extends WizardBootConfig
 
         // Check if niche data is already initialized (skip DeepSeek call if already done)
         $existing_niche = NicheInit::getInstance()->getNiche();
-        if (!empty($existing_niche) && !empty($existing_niche['keywords']) && !empty($existing_niche['recipes'])) {
+        if (!empty($existing_niche) && !empty($existing_niche['recipes'])) {
             // Niche already initialized, no need to call DeepSeek again
             // Silent success - no warning needed
             return true;
@@ -406,10 +396,13 @@ class NicheConfig extends WizardBootConfig
             // DeepSeek succeeded - silent success, no message needed
             return true;
         } else {
-            // DeepSeek failed - This is acceptable for info-only articles
-            // We don't show a warning because the user can continue without DeepSeek data
-            // The wizard will simply create info articles without advanced niche insights
-            error_log('Independent Niche: Could not initialize niche data from DeepSeek API - User can continue with basic article generation');
+            // DeepSeek failed - Initialize with default data structure
+            // This allows the wizard to function without DeepSeek
+            $is_ce_enabled = self::isCeIntegration();
+            $default_data = NicheInit::getInstance()->getDefaultNicheData($is_ce_enabled);
+            NicheInit::getInstance()->setNiche($default_data);
+
+            error_log('Independent Niche: DeepSeek API unavailable - Initialized with default recipe structure');
 
             // Return true to allow progression - no warning shown
             return true;

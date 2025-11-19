@@ -239,6 +239,7 @@ class NicheInit
     private function getDefaultRecipes($is_ce_enabled)
     {
         // Default recipes when DeepSeek data is not available
+        // MUST return proper format for getInitRecipes() which expects id => title mapping
         if ($is_ce_enabled) {
             return array(
                 1 => __('Product Roundup', 'independent-niche'),
@@ -252,6 +253,30 @@ class NicheInit
                 3 => __('Tips & Tricks', 'independent-niche'),
             );
         }
+    }
+
+    public function getDefaultNicheData($is_ce_enabled)
+    {
+        // Initialize default niche structure when DeepSeek is not available
+        $recipes = array();
+        $default_recipes = $this->getDefaultRecipes($is_ce_enabled);
+
+        foreach ($default_recipes as $id => $title) {
+            $recipes[] = array(
+                'id' => $id,
+                'title' => $title,
+                'articles' => 10,
+                'ce_required' => $is_ce_enabled,
+                'allocated_credits' => 0,
+            );
+        }
+
+        return array(
+            'keywords' => array(),
+            'recipes' => $recipes,
+            'trending_topics' => array(),
+            'remaining_credits' => 30,
+        );
     }
 
     public function isCeRequired()
